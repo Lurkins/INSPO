@@ -3,6 +3,8 @@
     <div class="row">
       <div class="col-sm-12">
         <h1>Tasks</h1>
+        <img v-if="image" v-bind:src="`http://localhost:5000/file/${image}`" alt="${image}">
+        <div v-else></div>
         <hr><br><br>
         <button type="button" class="btn btn-success btn-sm">Add Task</button>
         <br><br>
@@ -24,12 +26,6 @@
                 <span v-else>No</span>
               </td>
               <td>
-            <div class="large-12 medium-12 small-12 cell">
-      <label>File
-        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-      </label>
-        <button v-on:click="submitFile()">Submit</button>
-    </div>
 <!-- Styled -->
     <!-- <b-form-file
       v-model="file"
@@ -48,6 +44,12 @@
           </tbody>
         </table>
       </div>
+      <div class="large-12 medium-12 small-12 cell">
+        <label>File
+          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+        </label>
+          <button v-on:click="submitFile()">Submit</button>
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +62,7 @@ export default {
     return {
       tasks: [],
       file: null,
+      image: false,
     };
   },
   methods: {
@@ -86,7 +89,10 @@ export default {
           },
         })
         .then((res) => {
-          console.log('SUCCESS!!', res);
+          // eslint-disable-next-line
+          console.log('SUCCESS!!');
+          // eslint-disable-next-line
+          this.image = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -94,6 +100,7 @@ export default {
         });
     },
     handleFileUpload() {
+      // eslint-disable-next-line
       this.file = this.$refs.file.files[0];
     },
   },
