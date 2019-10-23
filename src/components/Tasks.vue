@@ -26,17 +26,12 @@
                 <span v-else>No</span>
               </td>
               <td>
-<!-- Styled -->
-    <!-- <b-form-file
-      v-model="file"
-      :state="Boolean(file)"
-      placeholder="Choose a file or drop it here..."
-      drop-placeholder="Drop file here..."
-      accept=".jpg, .png, .gif"
-    ></b-form-file>
-    <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div> -->
                 <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-warning btn-sm">Complete</button>
+                <button
+                  v-on:click="handleComplete()"
+                  type="button"
+                  class="btn btn-warning btn-sm"
+                >Complete</button>
                   <button type="button" class="btn btn-danger px-3 btn-sm">Delete</button>
                 </div>
               </td>
@@ -102,6 +97,19 @@ export default {
     handleFileUpload() {
       // eslint-disable-next-line
       this.file = this.$refs.file.files[0];
+    },
+    handleComplete() {
+      const name = this.tasks[0].title;
+      const path = `http://localhost:5000/todo/api/task/complete/${name}`;
+      axios.put(path)
+        .then((res) => {
+          this.tasks = res.data.done;
+          console.error(res);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
     },
   },
   created() {
