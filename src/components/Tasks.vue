@@ -18,7 +18,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(task, index) in tasks" :key="index">
+            <tr v-for="(task) in tasks" :key="task._id.$oid">
               <td>{{ task.title }}</td>
               <td>{{ task.description }}</td>
               <td>
@@ -28,7 +28,7 @@
               <td>
                 <div class="btn-group" role="group">
                 <button
-                  v-on:click="handleComplete()"
+                  v-on:click="handleComplete(task._id.$oid)"
                   type="button"
                   class="btn btn-warning btn-sm"
                 >Complete</button>
@@ -65,7 +65,7 @@ export default {
       const path = 'http://localhost:5000/todo/api/task';
       axios.get(path)
         .then((res) => {
-          this.tasks = res.data.result;
+          this.tasks = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -98,13 +98,12 @@ export default {
       // eslint-disable-next-line
       this.file = this.$refs.file.files[0];
     },
-    handleComplete() {
-      const name = this.tasks[0].title;
-      const path = `http://localhost:5000/todo/api/task/complete/${name}`;
+    handleComplete(id) {
+      // const name = this.tasks[0].title;
+      const path = `http://localhost:5000/todo/api/task/${id}`;
       axios.put(path)
         .then((res) => {
-          this.tasks = res.data.done;
-          console.error(res);
+          this.tasks = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
