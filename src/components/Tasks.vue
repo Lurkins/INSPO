@@ -3,45 +3,35 @@
     <div class="row">
       <div class="col-sm-12">
         <h1>Tasks</h1>
-        <img v-if="image" v-bind:src="`http://localhost:5000/file/${image}`" alt="${image}">
-        <div v-else></div>
         <hr><br><br>
-        <button type="button" class="btn btn-info btn-sm" v-b-modal.task-modal>Add Task</button>
+        <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
         <br><br>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col">Done?</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(task) in tasks" :key="task._id.$oid">
-              <td>{{ task.title }}</td>
-              <td>{{ task.description }}</td>
-              <td>
-                <span v-if="task.done">Yes</span>
-                <span v-else>No</span>
-              </td>
-              <td>
+        <div>
+          <b-card-group class="thisCard d-flex justify-content-around flex-wrap" columns>
+            <b-card bg-variant="info" class="bs-card m-3 p-3" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${image}`" img-alt="Image" img-top>
+              <b-card-text>
+                {{ task.description }}
+              </b-card-text>
                 <div class="btn-group" role="group">
-                <button
-                  v-on:click="handleComplete(task._id.$oid)"
-                  type="button"
-                  class="btn btn-success btn-sm"
-                >Complete</button>
-                <button
-                  type="button"
-                  class="btn btn-secondary px-3 btn-sm"
-                  v-on:click="handleDelete(task._id.$oid)"
-                >Delete</button>
+                  <button
+                    v-on:click="handleComplete(task._id.$oid)"
+                    type="button"
+                    class="btn btn-light btn-sm"
+                  >Complete</button>
+                  <button
+                    type="button"
+                    class="btn btn-dark px-3 btn-sm"
+                    v-on:click="handleDelete(task._id.$oid)"
+                  >Delete</button>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              <template v-slot:footer>
+                <small class="thisCard">
+                  <span v-if="task.done">Yes</span>
+                  <span v-else>No</span></small>
+              </template>
+            </b-card>
+          </b-card-group>
+        </div>
       </div>
       <div class="large-12 medium-12 small-12 cell">
         <label>File
@@ -203,3 +193,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+.thisCard {
+  color: rgb(0, 255, 145);
+}
+
+.bs-card {
+  width: 300px;
+}
+
+</style>
