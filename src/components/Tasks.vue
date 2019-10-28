@@ -8,7 +8,7 @@
         <br><br>
         <div>
           <b-card-group class="thisCard d-flex justify-content-around flex-wrap" columns>
-            <b-card bg-variant="info" class="bs-card m-3 p-3" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${image}`" img-alt="Image" img-top>
+            <b-card bg-variant="info" class="bs-card" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${image}`" img-alt="Image" img-top>
               <b-card-text>
                 {{ task.description }}
               </b-card-text>
@@ -32,12 +32,6 @@
             </b-card>
           </b-card-group>
         </div>
-      </div>
-      <div class="large-12 medium-12 small-12 cell">
-        <label>File
-          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-        </label>
-          <button v-on:click="submitFile()">Submit</button>
       </div>
     </div>
       <b-modal ref="addTaskModal"
@@ -64,6 +58,12 @@
             required
             placeholder="Enter description">
           </b-form-input>
+          <div class="m-3">
+            <label>File
+              <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+            </label>
+            <button v-on:click="submitFile()">Submit</button>
+          </div>
           </b-form-group>
         <b-form-group id="form-read-group">
         </b-form-group>
@@ -194,12 +194,13 @@ export default {
 };
 </script>
 <style scoped>
-.thisCard {
+/* .thisCard {
   color: rgb(0, 255, 145);
-}
+} */
 
 .bs-card {
-  width: 300px;
+  width: 350px;
+  color: rgb(0, 255, 145);
 }
 
 </style>
