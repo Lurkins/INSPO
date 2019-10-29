@@ -154,7 +154,12 @@ export default {
     },
     addTask(payload) {
       const path = 'http://localhost:5000/todo/api/task';
-      axios.post(path, payload)
+      axios.post(path, payload,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
         .then(() => {
           this.getTasks();
         })
@@ -174,10 +179,14 @@ export default {
       this.$refs.addTaskModal.hide();
       let done = false;
       if (this.addTaskForm.done[0]) done = true;
+      const formData = new FormData();
+      formData.append('file', this.file);
       const payload = {
         title: this.addTaskForm.title,
         description: this.addTaskForm.description,
-        done, // property shorthand
+        file: formData,
+        done,
+        // property shorthand
       };
       this.addTask(payload);
       this.initForm();
