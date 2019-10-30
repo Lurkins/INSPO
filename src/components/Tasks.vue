@@ -58,15 +58,15 @@
             required
             placeholder="Enter description">
           </b-form-input>
-          <div class="m-3">
-            <label>File
-              <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-            </label>
-            <button v-on:click="submitFile()">Submit</button>
-          </div>
           </b-form-group>
         <b-form-group id="form-read-group">
         </b-form-group>
+        <div class="large-12 medium-12 small-12">
+          <label>File
+            <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+          </label>
+          <!-- <button v-on:click="submitFile()">Submit</button> -->
+      </div>
         <b-button class="mr-3" type="submit" variant="primary">Submit</b-button>
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
@@ -102,28 +102,28 @@ export default {
           console.error(error);
         });
     },
-    submitFile() {
-      const formData = new FormData();
-      formData.append('file', this.file);
-      const path = 'http://localhost:5000/todo/api/photo';
-      axios.post(path,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((res) => {
-          // eslint-disable-next-line
-          console.log('SUCCESS!!');
-          // eslint-disable-next-line
-          this.image = res.data;
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.log('FAILURE!!', error);
-        });
-    },
+    // submitFile() {
+    //   const formData = new FormData();
+    //   formData.append('file', this.file);
+    //   const path = 'http://localhost:5000/todo/api/photo';
+    //   axios.post(path,
+    //     formData,
+    //     {
+    //       headers: {
+    //         'Content-Type': 'multipart/form-data',
+    //       },
+    //     })
+    //     .then((res) => {
+    //       // eslint-disable-next-line
+    //       console.log('SUCCESS!!');
+    //       // eslint-disable-next-line
+    //       this.image = res.data;
+    //     })
+    //     .catch((error) => {
+    //       // eslint-disable-next-line
+    //       console.log('FAILURE!!', error);
+    //     });
+    // },
     handleFileUpload() {
       // eslint-disable-next-line
       this.file = this.$refs.file.files[0];
@@ -153,9 +153,9 @@ export default {
         });
     },
     addTask(payload) {
-      const path = 'http://localhost:5000/todo/api/task';
-      axios.post(path, payload,
-        {
+      const path = 'http://localhost:5000/todo/api/task/multi';
+      axios.post(path,
+        payload, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -172,21 +172,20 @@ export default {
     initForm() {
       this.addTaskForm.title = '';
       this.addTaskForm.description = '';
-      this.addTaskForm.read = [];
+      this.addTaskForm.done = [];
     },
     onSubmit(evt) {
       evt.preventDefault();
+      const formData = new FormData();
+      formData.append('file', this.file);
       this.$refs.addTaskModal.hide();
       let done = false;
       if (this.addTaskForm.done[0]) done = true;
-      const formData = new FormData();
-      formData.append('file', this.file);
       const payload = {
         title: this.addTaskForm.title,
         description: this.addTaskForm.description,
+        done, // property shorthand
         file: formData,
-        done,
-        // property shorthand
       };
       this.addTask(payload);
       this.initForm();
