@@ -2,35 +2,14 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1>Tasks</h1>
+        <h1>Edit Task</h1>
         <hr><br><br>
         <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
         <br><br>
         <div>
-          <b-card-group class="thisCard d-flex justify-content-around flex-wrap" columns>
-            <b-card bg-variant="info" class="bs-card" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${image}`" img-alt="Image" img-top>
-              <b-card-text>
-                {{ task.description }}
-              </b-card-text>
-                <div class="btn-group" role="group">
-                  <button
-                    v-on:click="handleComplete(task._id.$oid)"
-                    type="button"
-                    class="btn btn-light btn-sm"
-                  >Complete</button>
-                  <button
-                    type="button"
-                    class="btn btn-dark px-3 btn-sm"
-                    v-on:click="handleDelete(task._id.$oid)"
-                  >Delete</button>
-                </div>
-              <template v-slot:footer>
-                <small class="thisCard">
-                  <span v-if="task.done">Yes</span>
-                  <span v-else>No</span></small>
-              </template>
-            </b-card>
-          </b-card-group>
+        <div>
+          <b-img src="http://placekitten.com/200/300" fluid alt="Responsive image"></b-img>
+        </div>
         </div>
       </div>
       <div class="large-12 medium-12 small-12">
@@ -40,37 +19,6 @@
           <button v-on:click="submitFile()">Submit</button>
       </div>
     </div>
-      <b-modal ref="addTaskModal"
-        id="task-modal"
-        title="Add a new task"
-        hide-footer>
-        <b-form @submit="onSubmit" @reset="onReset" class="w-100">
-          <b-form-group id="form-title-group"
-            label="Task:"
-            label-for="form-title-input">
-          <b-form-input id="form-title-input"
-            type="text"
-            v-model="addTaskForm.title"
-            required
-            placeholder="Enter task">
-          </b-form-input>
-          </b-form-group>
-          <b-form-group id="form-description-group"
-            label="Description:"
-            label-for="form-description-input">
-          <b-form-input id="form-description-input"
-            type="text"
-            v-model="addTaskForm.description"
-            required
-            placeholder="Enter description">
-          </b-form-input>
-          </b-form-group>
-        <b-form-group id="form-read-group">
-        </b-form-group>
-        <b-button class="mr-3" type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
-      </b-form>
-    </b-modal>
   </div>
 </template>
 
@@ -194,13 +142,8 @@ export default {
 };
 </script>
 <style scoped>
-/* .thisCard {
-  color: rgb(0, 255, 145);
-} */
-
 .bs-card {
   width: 350px;
   color: rgb(0, 255, 145);
 }
-
 </style>

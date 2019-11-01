@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Tasks from '../components/Tasks.vue';
 import Test from '../components/Test.vue';
+import EditItem from '../components/EditItem.vue';
 
 Vue.use(VueRouter);
 
@@ -18,6 +19,11 @@ export default new VueRouter({
       path: '/test',
       name: 'Test',
       component: Test,
+    },
+    {
+      path: '/edit',
+      name: 'EditItem',
+      component: EditItem,
     },
   ],
 });
