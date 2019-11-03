@@ -8,7 +8,7 @@
         <br><br>
         <div>
           <b-card-group class="thisCard d-flex justify-content-around flex-wrap" columns>
-            <b-card bg-variant="info" class="bs-card" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${image}`" img-alt="Image" img-top>
+            <b-card bg-variant="info" class="bs-card" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${task.image_name}`" img-alt="task" img-top>
               <b-card-text>
                 {{ task.description }}
               </b-card-text>
@@ -23,6 +23,11 @@
                     class="btn btn-dark px-3 btn-sm"
                     v-on:click="handleDelete(task._id.$oid)"
                   >Delete</button>
+                  <button
+                    type="button"
+                    class="btn btn-warning px-3 btn-sm"
+                    v-on:click="handleEdit(task._id.$oid)"
+                  >Edit</button>
                 </div>
               <template v-slot:footer>
                 <small class="thisCard">
@@ -32,12 +37,6 @@
             </b-card>
           </b-card-group>
         </div>
-      </div>
-      <div class="large-12 medium-12 small-12">
-        <label>File
-          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-        </label>
-          <button v-on:click="submitFile()">Submit</button>
       </div>
     </div>
       <b-modal ref="addTaskModal"
@@ -95,6 +94,7 @@ export default {
       const path = 'http://localhost:5000/todo/api/task';
       axios.get(path)
         .then((res) => {
+          console.log(res.data);
           this.tasks = res.data;
         })
         .catch((error) => {
@@ -151,6 +151,9 @@ export default {
           // eslint-disable-next-line
           console.error(error);
         });
+    },
+    handleEdit(id) {
+      this.$router.push({ name: 'EditItem', params: { id } });
     },
     addTask(payload) {
       const path = 'http://localhost:5000/todo/api/task';

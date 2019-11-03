@@ -21,7 +21,7 @@ export default new VueRouter({
       component: Test,
     },
     {
-      path: '/edit',
+      path: '/edit/:id',
       name: 'EditItem',
       component: EditItem,
     },

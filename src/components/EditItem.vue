@@ -4,19 +4,20 @@
       <div class="col-sm-12">
         <h1>Edit Task</h1>
         <hr><br><br>
-        <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
         <br><br>
         <div>
-        <div>
-          <b-img src="http://placekitten.com/200/300" fluid alt="Responsive image"></b-img>
-        </div>
+          <div>
+            <b-img :src="`http://localhost:5000/file/${image}`" fluid alt="task"></b-img>
+          </div>
+          <div>{{ title }}</div>
+          <div>{{ description }}</div>
         </div>
       </div>
       <div class="large-12 medium-12 small-12">
         <label>File
           <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
         </label>
-          <button v-on:click="submitFile()">Submit</button>
+          <button v-on:click="submitFile(id)">Submit</button>
       </div>
     </div>
   </div>
@@ -28,32 +29,34 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      tasks: [],
+      id: '',
+      title: '',
+      description: '',
       file: null,
       image: false,
-      addTaskForm: {
-        title: '',
-        description: '',
-        done: [],
-      },
     };
   },
   methods: {
-    getTasks() {
-      const path = 'http://localhost:5000/todo/api/task';
+    getItemData() {
+      const path = `http://localhost:5000/todo/api/task/id/${this.$route.params.id}`;
       axios.get(path)
         .then((res) => {
-          this.tasks = res.data;
+          console.log(res.data);
+          this.title = res.data.title;
+          this.description = res.data.description;
+          this.id = this.$route.params.id;
+          this.image = res.data.image_name;
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.error(error);
         });
     },
-    submitFile() {
+    submitFile(id) {
+      console.log('this is submit file');
       const formData = new FormData();
       formData.append('file', this.file);
-      const path = 'http://localhost:5000/todo/api/photo';
+      const path = `http://localhost:5000/todo/api/photo/${id}`;
       axios.post(path,
         formData,
         {
@@ -76,74 +79,15 @@ export default {
       // eslint-disable-next-line
       this.file = this.$refs.file.files[0];
     },
-    handleComplete(id) {
-      // const name = this.tasks[0].title;
-      const path = `http://localhost:5000/todo/api/task/${id}`;
-      axios.put(path)
-        .then((res) => {
-          this.tasks = res.data;
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
-    },
-    handleDelete(id) {
-      // const name = this.tasks[0].title;
-      const path = `http://localhost:5000/todo/api/task/delete/${id}`;
-      axios.delete(path)
-        .then((res) => {
-          this.tasks = res.data;
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
-    },
-    addTask(payload) {
-      const path = 'http://localhost:5000/todo/api/task';
-      axios.post(path, payload)
-        .then(() => {
-          this.getTasks();
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.log(error);
-          this.getTasks();
-        });
-    },
-    initForm() {
-      this.addTaskForm.title = '';
-      this.addTaskForm.description = '';
-      this.addTaskForm.done = [];
-    },
-    onSubmit(evt) {
-      evt.preventDefault();
-      this.$refs.addTaskModal.hide();
-      let done = false;
-      if (this.addTaskForm.done[0]) done = true;
-      const payload = {
-        title: this.addTaskForm.title,
-        description: this.addTaskForm.description,
-        done, // property shorthand
-      };
-      this.addTask(payload);
-      this.initForm();
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      this.$refs.addTaskModal.hide();
-      this.initForm();
-    },
   },
   created() {
-    this.getTasks();
+    this.getItemData();
   },
 };
 </script>
 <style scoped>
-.bs-card {
+/* .bs-card {
   width: 350px;
   color: rgb(0, 255, 145);
-}
+} */
 </style>
