@@ -129,7 +129,6 @@ export default {
       this.file = this.$refs.file.files[0];
     },
     handleComplete(id) {
-      // const name = this.tasks[0].title;
       const path = `http://localhost:5000/todo/api/task/${id}`;
       axios.put(path)
         .then((res) => {
@@ -141,7 +140,6 @@ export default {
         });
     },
     handleDelete(id) {
-      // const name = this.tasks[0].title;
       const path = `http://localhost:5000/todo/api/task/delete/${id}`;
       axios.delete(path)
         .then((res) => {
