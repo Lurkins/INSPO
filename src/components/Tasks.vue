@@ -94,7 +94,6 @@ export default {
       const path = 'http://localhost:5000/todo/api/task';
       axios.get(path)
         .then((res) => {
-          console.log(res.data);
           this.tasks = res.data;
         })
         .catch((error) => {

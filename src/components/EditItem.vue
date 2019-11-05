@@ -8,6 +8,15 @@
         <div>
           <div>
             <b-img :src="`http://localhost:5000/file/${image}`" fluid alt="task"></b-img>
+              <b-form-group label="image:" label-for="file-default" label-cols-sm="2">
+                <b-form-file id="file" v-on:change="handleFileUpload()"></b-form-file>
+              </b-form-group>
+            <!-- <div class="large-12 medium-12 small-12">
+              <label>File
+               <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+              </label>
+              <button v-on:click="submitFile(id)">Submit</button>
+            </div> -->
           </div>
           <div>{{ title }}</div>
           <div>{{ description }}</div>
@@ -44,12 +53,6 @@
             </b-card>
         </div>
       </div>
-      <div class="large-12 medium-12 small-12">
-        <label>File
-          <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-        </label>
-          <button v-on:click="submitFile(id)">Submit</button>
-      </div>
     </div>
   </div>
 </template>
@@ -77,7 +80,6 @@ export default {
       const path = `http://localhost:5000/todo/api/task/id/${this.$route.params.id}`;
       axios.get(path)
         .then((res) => {
-          console.log(res.data);
           this.title = res.data.title;
           this.description = res.data.description;
           this.id = this.$route.params.id;
@@ -123,7 +125,6 @@ export default {
       };
       axios.put(path, payload)
         .then((res) => {
-          console.log(res.data);
           this.title = res.data.result.title;
           this.description = res.data.result.description;
         })
@@ -131,7 +132,6 @@ export default {
           // eslint-disable-next-line
           console.error(error);
         });
-      console.log(JSON.stringify(this.form));
     },
     onReset(evt) {
       evt.preventDefault();
