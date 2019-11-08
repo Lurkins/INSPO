@@ -72,22 +72,18 @@
         <div class="container">
             <hr>
         </div>
-        <footer>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="p-5">
-                        <h6 class="text-dark my-5 py-5">Footer - {{ title }}</h6>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <Footer />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Footer from './Footer.vue';
 
 export default {
+  components: {
+    Footer,
+  },
   data() {
     return {
       id: '',

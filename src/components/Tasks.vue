@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
@@ -71,12 +72,18 @@
       </b-form>
     </b-modal>
   </div>
+  <Footer />
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Footer from './Footer.vue';
 
 export default {
+  components: {
+    Footer,
+  },
   data() {
     return {
       tasks: [],
