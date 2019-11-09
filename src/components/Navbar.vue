@@ -1,7 +1,7 @@
 <template>
     <div>
-    <b-navbar class="mb-5" toggleable="lg" type="dark" variant="info">
-        <b-navbar-brand href="/">{{ msg }}</b-navbar-brand>
+    <b-navbar class="mb-5" toggleable="lg" type="dark" variant="success" fixed="top">
+        <b-navbar-brand to="/">{{ msg }}</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
