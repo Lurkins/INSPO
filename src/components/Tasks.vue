@@ -1,5 +1,6 @@
 <template>
 <div>
+  <Navbar />
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
@@ -79,10 +80,12 @@
 <script>
 import axios from 'axios';
 import Footer from './Footer.vue';
+import Navbar from './Navbar.vue';
 
 export default {
   components: {
     Footer,
+    Navbar,
   },
   data() {
     return {
@@ -201,13 +204,8 @@ export default {
 };
 </script>
 <style scoped>
-/* .thisCard {
-  color: rgb(0, 255, 145);
-} */
-
-.bs-card {
-  width: 350px;
-  color: rgb(0, 255, 145);
-}
-
+  .bs-card {
+    width: 350px;
+    color: rgb(0, 255, 145);
+  }
 </style>

@@ -1,5 +1,6 @@
 <template>
 <div>
+    <Navbar />
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -78,11 +79,13 @@
 
 <script>
 import axios from 'axios';
+import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 
 export default {
   components: {
     Footer,
+    Navbar,
   },
   data() {
     return {
