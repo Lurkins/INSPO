@@ -14,8 +14,18 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
             <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+              <label class="sr-only" for="inline-form-input-name">Name</label>
+                <b-input
+                    id="inline-form-input-name"
+                    class="mb-2 mr-sm-2 mb-sm-0"
+                    placeholder="Jane Doe"
+                ></b-input>
+
+                <label class="sr-only" for="inline-form-input-username">Username</label>
+                <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
+                    <b-input id="inline-form-input-username" placeholder="Username"></b-input>
+                </b-input-group>
+                <b-button variant="primary">Login</b-button>
             </b-nav-form>
 
             <b-nav-item-dropdown text="Lang" right>
