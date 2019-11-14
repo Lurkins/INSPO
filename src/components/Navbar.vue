@@ -18,12 +18,12 @@
                 <b-input
                     id="inline-form-input-name"
                     class="mb-2 mr-sm-2 mb-sm-0"
-                    placeholder="Jane Doe"
+                    placeholder="Username"
                 ></b-input>
 
                 <label class="sr-only" for="inline-form-input-username">Username</label>
                 <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
-                    <b-input id="inline-form-input-username" placeholder="Username"></b-input>
+                    <b-input id="inline-form-input-username" placeholder="Password"></b-input>
                 </b-input-group>
                 <b-button variant="primary">Login</b-button>
             </b-nav-form>
@@ -44,14 +44,32 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Navbar',
   data() {
     return {
       msg: 'TestLogo',
+      loginRes: '',
     };
   },
   methods: {
+    login() {
+      const path = 'http://localhost:5000/login';
+      axios.get(path)
+        .then((res) => {
+          this.tasks = res;
+        //   this.title = res.data.title;
+        //   this.description = res.data.description;
+        //   this.id = this.$route.params.id;
+        //   this.image = res.data.image_name;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+    },
 
   },
 };
