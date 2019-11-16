@@ -138,10 +138,6 @@ export default {
           console.log('FAILURE!!', error);
         });
     },
-    // handleFileUpload() {
-    //   // eslint-disable-next-line
-    //   this.file = this.$refs.file.files[0];
-    // },
     onSubmit(evt) {
       evt.preventDefault();
       const path = `http://localhost:5000/todo/api/task/edit/${this.id}`;
@@ -178,8 +174,5 @@ export default {
 };
 </script>
 <style scoped>
-/* .bs-card {
-  width: 350px;
-  color: rgb(0, 255, 145);
-} */
+
 </style>
