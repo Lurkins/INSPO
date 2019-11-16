@@ -13,26 +13,48 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-nav-form>
-              <label class="sr-only" for="inline-form-input-name">Name</label>
-                <b-input
-                    id="inline-form-input-name"
-                    class="mb-2 mr-sm-2 mb-sm-0"
-                    placeholder="Username"
-                    v-model="form.username"
-                ></b-input>
-
-                <label class="sr-only" for="inline-form-input-username">Username</label>
-                <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
+            <b-nav-item-dropdown text="Sign In" right>
+                <b-dropdown-form class="p-3">
+                    <h5>Sign in to existing account</h5>
+                    <label class="sr-only" for="inline-form-input-username">Username</label>
                     <b-input
                         id="inline-form-input-username"
-                        v-model="form.password"
-                        placeholder="Password">
-                    </b-input>
-                </b-input-group>
-                <b-button @click="onSubmit" variant="primary">Login</b-button>
-            </b-nav-form>
+                        class="mb-2 drop-input"
+                        placeholder="Username"
+                        v-model="form.username"
+                    ></b-input>
 
+                    <label class="sr-only" for="inline-form-input-password">Password</label>
+                    <b-input
+                        id="inline-form-input-password"
+                        v-model="form.password"
+                        placeholder="Password"
+                        class="mb-2 mb-2 drop-input"
+                    ></b-input>
+                    <b-button @click="onSubmit" variant="primary">Login</b-button>
+                </b-dropdown-form>
+            </b-nav-item-dropdown>
+            <b-nav-item-dropdown text="Register" right>
+                <b-dropdown-form class="p-3">
+                    <h5>Register New User</h5>
+                    <label class="sr-only" for="inline-form-input-username">Username</label>
+                    <b-input
+                        id="inline-form-input-username"
+                        class="mb-2 drop-input"
+                        placeholder="Username"
+                        v-model="form.username"
+                    ></b-input>
+
+                    <label class="sr-only" for="inline-form-input-password">Password</label>
+                    <b-input
+                        id="inline-form-input-password"
+                        v-model="form.password"
+                        placeholder="Password"
+                        class="mb-2 drop-input"
+                    ></b-input>
+                    <b-button @click="onSubmit" variant="primary">Login</b-button>
+                </b-dropdown-form>
+            </b-nav-item-dropdown>
 
             <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
@@ -92,5 +114,7 @@ export default {
 };
 </script>
 <style scoped>
-
+    .drop-input {
+        width: 300px;
+    }
 </style>
