@@ -19,13 +19,18 @@
                     id="inline-form-input-name"
                     class="mb-2 mr-sm-2 mb-sm-0"
                     placeholder="Username"
+                    v-model="form.username"
                 ></b-input>
 
                 <label class="sr-only" for="inline-form-input-username">Username</label>
                 <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
-                    <b-input id="inline-form-input-username" placeholder="Password"></b-input>
+                    <b-input
+                        id="inline-form-input-username"
+                        v-model="form.password"
+                        placeholder="Password">
+                    </b-input>
                 </b-input-group>
-                <b-button variant="primary">Login</b-button>
+                <b-button @click="onSubmit" variant="primary">Login</b-button>
             </b-nav-form>
 
 
@@ -51,24 +56,36 @@ export default {
   data() {
     return {
       msg: 'TestLogo',
-      loginRes: '',
+      form: {
+        username: '',
+        password: '',
+      },
     };
   },
   methods: {
-    login() {
-      const path = 'http://localhost:5000/login';
-      axios.get(path)
+    initForm() {
+      this.username = '';
+      this.password = '';
+    },
+    onSubmit(evt) {
+      evt.preventDefault();
+      const path = 'http://localhost:5000/auth';
+      const payload = {
+        username: this.form.username,
+        password: this.form.password,
+      };
+      axios.post(path, payload)
         .then((res) => {
-          this.tasks = res;
-        //   this.title = res.data.title;
-        //   this.description = res.data.description;
-        //   this.id = this.$route.params.id;
-        //   this.image = res.data.image_name;
+          // eslint-disable-next-line
+          console.log(res);
+        //   this.onReset(evt);
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.error(error);
         });
+      // eslint-disable-next-line
+      console.log(this.form.username);
     },
 
   },
