@@ -1,10 +1,10 @@
 <template>
 <div>
     <Navbar />
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-sm-12">
-                <h1>{{ title }}</h1>
+                <h1 class="mt-4">{{ title }}</h1>
                 <hr>
                 <p>{{ description }}</p>
             </div>

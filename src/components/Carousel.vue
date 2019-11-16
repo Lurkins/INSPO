@@ -12,7 +12,7 @@
       style="text-shadow: 1px 1px 2px #333;"
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd"
-      class="mb-5"
+      class="my-5"
     >
       <!-- Text slides with image -->
       <b-carousel-slide

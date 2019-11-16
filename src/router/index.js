@@ -26,4 +26,8 @@ export default new VueRouter({
       component: EditItem,
     },
   ],
+  // eslint-disable-next-line
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  },
 });
