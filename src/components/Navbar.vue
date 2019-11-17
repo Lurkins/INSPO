@@ -72,6 +72,8 @@
 
 <script>
 import axios from 'axios';
+// eslint-disable-next-line
+axios.defaults.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
 
 export default {
   name: 'Navbar',
@@ -98,6 +100,15 @@ export default {
       };
       axios.post(path, payload)
         .then((res) => {
+          if (!res.data.data.token) {
+            this.loginFailed();
+            return;
+          }
+
+          localStorage.token = res.data.data.token;
+          this.error = false;
+
+          this.$router.replace(this.$route.query.redirect || '/profile');
           // eslint-disable-next-line
           console.log(res);
         //   this.onReset(evt);
