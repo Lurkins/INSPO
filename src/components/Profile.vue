@@ -4,13 +4,13 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="mt-4">{{ title }}</h1>
+                <h1 class="mt-4">{{ username }}</h1>
                 <hr>
-                <p>{{ description }}</p>
+                <!-- <p>{{ description }}</p> -->
             </div>
         </div>
     </div>
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <b-img :src="`http://localhost:5000/file/${image}`" alt="task" fluid class="mb-5"></b-img>
@@ -34,8 +34,8 @@
     </div>
     <div class="container">
         <hr>
-    </div>
-    <div class="container">
+    </div> -->
+    <!-- <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="my-5">
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <Footer />
   </div>
 </template>
@@ -86,87 +86,76 @@ export default {
   },
   data() {
     return {
-      id: '',
-      title: '',
-      description: '',
-      file: null,
-      image: false,
-      form: {
-        title: '',
-        description: '',
-      },
-      show: true,
+      username: '',
     };
   },
   methods: {
-    getItemData() {
-      const path = `http://localhost:5000/todo/api/task/id/${this.$route.params.id}`;
+    getUserData() {
+      const path = `http://localhost:5000/users/${this.$route.params.username}`;
       axios.get(path)
         .then((res) => {
-          this.title = res.data.title;
-          this.description = res.data.description;
-          this.id = this.$route.params.id;
-          this.image = res.data.image_name;
+          this.username = res.data.data.username;
+        //   this.image = res.data.image_name;
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.error(error);
         });
     },
-    submitFile(id) {
-      const formData = new FormData();
-      formData.append('file', this.file);
-      const path = `http://localhost:5000/todo/api/photo/${id}`;
-      axios.post(path,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((res) => {
-          // eslint-disable-next-line
-          console.log('SUCCESS!!');
-          // eslint-disable-next-line
-          this.image = res.data;
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.log('FAILURE!!', error);
-        });
-    },
-    onSubmit(evt) {
-      evt.preventDefault();
-      const path = `http://localhost:5000/todo/api/task/edit/${this.id}`;
-      const payload = {
-        title: this.form.title,
-        description: this.form.description,
-      };
-      axios.put(path, payload)
-        .then((res) => {
-          this.title = res.data.result.title;
-          this.description = res.data.result.description;
-          this.onReset(evt);
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-      this.form.title = '';
-      this.form.description = '';
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    },
+    // submitFile(id) {
+    //   const formData = new FormData();
+    //   formData.append('file', this.file);
+    //   const path = `http://localhost:5000/todo/api/photo/${id}`;
+    //   axios.post(path,
+    //     formData,
+    //     {
+    //       headers: {
+    //         'Content-Type': 'multipart/form-data',
+    //       },
+    //     })
+    //     .then((res) => {
+    //       // eslint-disable-next-line
+    //       console.log('SUCCESS!!');
+    //       // eslint-disable-next-line
+    //       this.image = res.data;
+    //     })
+    //     .catch((error) => {
+    //       // eslint-disable-next-line
+    //       console.log('FAILURE!!', error);
+    //     });
+    // },
+    // onSubmit(evt) {
+    //   evt.preventDefault();
+    //   const path = `http://localhost:5000/todo/api/task/edit/${this.id}`;
+    //   const payload = {
+    //     title: this.form.title,
+    //     description: this.form.description,
+    //   };
+    //   axios.put(path, payload)
+    //     .then((res) => {
+    //       this.title = res.data.result.title;
+    //       this.description = res.data.result.description;
+    //       this.onReset(evt);
+    //     })
+    //     .catch((error) => {
+    //       // eslint-disable-next-line
+    //       console.error(error);
+    //     });
+    // },
+    // onReset(evt) {
+    //   evt.preventDefault();
+    //   // Reset our form values
+    //   this.form.title = '';
+    //   this.form.description = '';
+    //   // Trick to reset/clear native browser form validation state
+    //   this.show = false;
+    //   this.$nextTick(() => {
+    //     this.show = true;
+    //   });
+    // },
   },
   created() {
-    this.getItemData();
+    this.getUserData();
   },
 };
 </script>

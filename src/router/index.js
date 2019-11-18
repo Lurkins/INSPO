@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Tasks from '../components/Tasks.vue';
 import Test from '../components/Test.vue';
 import EditItem from '../components/EditItem.vue';
+import Profile from '../components/Profile.vue';
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ export default new VueRouter({
       path: '/edit/:id',
       name: 'EditItem',
       component: EditItem,
+    },
+    {
+      path: '/users/:username',
+      name: 'Profile',
+      component: Profile,
     },
   ],
   // eslint-disable-next-line
