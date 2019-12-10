@@ -79,7 +79,7 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      msg: 'TestLogo',
+      msg: 'The Inspirator',
       form: {
         username: '',
         password: '',

@@ -4,7 +4,7 @@
   <Carousel />
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-12">
         <h1>Tasks</h1>
         <hr><br><br>
         <b-form inline>
@@ -13,39 +13,42 @@
         </b-form>
         <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
         <br><br>
-        <div>
-          <b-card-group class="thisCard d-flex justify-content-around flex-wrap" columns>
-            <b-card bg-variant="info" class="bs-card" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${task.image_name}`" img-alt="task" img-top>
-              <b-card-text>
-                {{ task.description }}
-              </b-card-text>
-                <div class="btn-group" role="group">
-                  <button
-                    v-on:click="handleComplete(task._id.$oid)"
-                    type="button"
-                    class="btn btn-light btn-sm"
-                  >Complete</button>
-                  <button
-                    type="button"
-                    class="btn btn-dark px-3 btn-sm"
-                    v-on:click="handleDelete(task._id.$oid)"
-                  >Delete</button>
-                  <button
-                    type="button"
-                    class="btn btn-warning px-3 btn-sm"
-                    v-on:click="handleEdit(task._id.$oid)"
-                  >Edit</button>
-                </div>
-              <template v-slot:footer>
-                <small class="thisCard">
-                  <span v-if="task.done">Yes</span>
-                  <span v-else>No</span></small>
-              </template>
-            </b-card>
-          </b-card-group>
-        </div>
       </div>
     </div>
+    </div>
+    <div class="container-fluid">
+      <b-card-group columns>
+        <b-card bg-variant="light" class="bs-card shadow" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${task.image_name}`" :img-alt="task.title" img-top>
+          <b-card-text>
+            {{ task.description }}
+          </b-card-text>
+            <div class="btn-group" role="group">
+              <button
+                v-on:click="handleComplete(task._id.$oid)"
+                type="button"
+                class="btn btn-success btn-sm"
+              >Complete</button>
+              <button
+                type="button"
+                class="btn btn-dark px-3 btn-sm"
+                v-on:click="handleDelete(task._id.$oid)"
+              >Delete</button>
+              <button
+                type="button"
+                class="btn btn-warning px-3 btn-sm"
+                v-on:click="handleEdit(task._id.$oid)"
+              >Edit</button>
+            </div>
+          <template v-slot:footer>
+            <small>
+              <span v-if="task.done">Yes</span>
+              <span v-else>No</span>
+            </small>
+          </template>
+        </b-card>
+      </b-card-group>
+    </div>
+    <!-- modal -->
       <b-modal ref="addTaskModal"
         id="task-modal"
         title="Add a new task"
@@ -77,7 +80,6 @@
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
     </b-modal>
-  </div>
   <Footer />
   </div>
 </template>
@@ -212,7 +214,26 @@ export default {
 </script>
 <style scoped>
   .bs-card {
-    width: 350px;
-    color: rgb(0, 255, 145);
+    color: #000;
+  }
+  @media (min-width: 576px) {
+    .card-columns {
+        column-count: 2;
+    }
+  }
+  @media (min-width: 768px) {
+    .card-columns {
+        column-count: 2;
+    }
+  }
+  @media (min-width: 992px) {
+    .card-columns {
+        column-count: 2;
+    }
+  }
+  @media (min-width: 1200px) {
+    .card-columns {
+        column-count: 3;
+    }
   }
 </style>
