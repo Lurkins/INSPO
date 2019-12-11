@@ -104,11 +104,10 @@ export default {
             this.loginFailed();
             return;
           }
-
           localStorage.token = res.data.data.token;
+          const user = res.data.data.username;
+          this.$router.replace(this.$route.query.redirect || `users/${user}`);
           this.error = false;
-
-          this.$router.replace(this.$route.query.redirect || '/profile');
           // eslint-disable-next-line
           console.log(res);
         //   this.onReset(evt);
