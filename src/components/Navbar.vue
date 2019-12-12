@@ -13,9 +13,9 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-nav-item-dropdown text="Sign In" right>
+            <b-nav-item-dropdown text="Login" right>
                 <b-dropdown-form class="p-3">
-                    <h5>Sign in to existing account</h5>
+                    <h5>Login to existing account</h5>
                     <label class="sr-only" for="inline-form-input-username">Username</label>
                     <b-input
                         id="inline-form-input-username"
@@ -31,7 +31,7 @@
                         placeholder="Password"
                         class="mb-2 mb-2 drop-input"
                     ></b-input>
-                    <b-button @click="onSubmit" variant="primary">Login</b-button>
+                    <b-button @click="onSubmitLogin" variant="primary">Login</b-button>
                 </b-dropdown-form>
             </b-nav-item-dropdown>
             <b-nav-item-dropdown text="Register" right>
@@ -52,7 +52,7 @@
                         placeholder="Password"
                         class="mb-2 drop-input"
                     ></b-input>
-                    <b-button @click="onSubmit" variant="primary">Login</b-button>
+                    <b-button @click="onSubmitRegister" variant="primary">Register</b-button>
                 </b-dropdown-form>
             </b-nav-item-dropdown>
 
@@ -91,9 +91,37 @@ export default {
       this.username = '';
       this.password = '';
     },
-    onSubmit(evt) {
+    onSubmitLogin(evt) {
       evt.preventDefault();
       const path = 'http://localhost:5000/auth';
+      const payload = {
+        username: this.form.username,
+        password: this.form.password,
+      };
+      axios.post(path, payload)
+        .then((res) => {
+          if (!res.data.data.token) {
+            this.loginFailed();
+            return;
+          }
+          localStorage.token = res.data.data.token;
+          const user = res.data.data.username;
+          this.$router.replace(this.$route.query.redirect || `users/${user}`);
+          this.error = false;
+          // eslint-disable-next-line
+          console.log(res);
+        //   this.onReset(evt);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+      // eslint-disable-next-line
+      console.log(this.form.username);
+    },
+    onSubmitRegister(evt) {
+      evt.preventDefault();
+      const path = 'http://localhost:5000/register';
       const payload = {
         username: this.form.username,
         password: this.form.password,

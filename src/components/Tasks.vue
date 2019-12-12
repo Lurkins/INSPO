@@ -1,11 +1,10 @@
 <template>
 <div>
   <Navbar />
-  <Carousel />
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1>Tasks</h1>
+        <h1 class="mt-5 pt-5">Tasks</h1>
         <hr><br><br>
         <b-form inline>
           <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
@@ -80,6 +79,7 @@
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
     </b-modal>
+    <Carousel />
   <Footer />
   </div>
 </template>
@@ -196,6 +196,7 @@ export default {
       const payload = {
         title: this.addTaskForm.title,
         description: this.addTaskForm.description,
+        token: localStorage.token,
         done, // property shorthand
       };
       this.addTask(payload);
@@ -228,12 +229,12 @@ export default {
   }
   @media (min-width: 992px) {
     .card-columns {
-        column-count: 2;
+        column-count: 3;
     }
   }
   @media (min-width: 1200px) {
     .card-columns {
-        column-count: 3;
+        column-count: 4;
     }
   }
 </style>
