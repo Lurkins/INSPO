@@ -1,76 +1,85 @@
 <template>
 <div>
-    <Navbar />
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="mt-4">{{ username }}</h1>
-                <hr>
-                <!-- <p>{{ description }}</p> -->
-            </div>
-        </div>
+  <Navbar />
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="mt-5 pt-5">Tasks</h1>
+        <hr><br><br>
+        <b-form inline>
+          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        </b-form>
+        <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
+        <br><br>
+      </div>
     </div>
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <b-img :src="`http://localhost:5000/file/${image}`" alt="task" fluid class="mb-5"></b-img>
-            </div>
-            <div class="col-md-6">
-                <div>
-                    <div>
-                        <b-form-group label="Image:" label-for="file" label-cols-sm="12">
-                            <b-form-file id="file" v-model="file" class="mb-5">
-                            </b-form-file>
-                            <button
-                                v-on:click="submitFile(id)"
-                                type="button"
-                                class="btn btn-primary px-3">Submit
-                            </button>
-                        </b-form-group>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="container">
-        <hr>
-    </div> -->
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="my-5">
-                    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-                        <b-form-group
-                            id="input-group-1"
-                            label="Title:"
-                            label-for="input-1"
-                        >
-                            <b-form-input
-                            id="input-1"
-                            v-model="form.title"
-                            required
-                            placeholder="Enter title"
-                            ></b-form-input>
-                        </b-form-group>
-                        <b-form-group id="input-group-2" label="Description:" label-for="input-2">
-                            <b-form-input
-                            id="input-2"
-                            v-model="form.description"
-                            placeholder="Enter description"
-                            required
-                            ></b-form-input>
-                        </b-form-group>
-                        <b-button type="submit" variant="primary">Save</b-button>
-                        <b-button type="reset" variant="danger">Reset</b-button>
-                    </b-form>
-                    <b-card class="my-5 mb-5" header="Form Data Result">
-                    <pre class="m-0">{{ form }}</pre>
-                    </b-card>
-                </div>
+    <div class="container-fluid">
+      <b-card-group columns>
+        <b-card bg-variant="light" class="bs-card shadow" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${task.image_name}`" :img-alt="task.title" img-top>
+          <b-card-text>
+            {{ task.description }}
+          </b-card-text>
+            <div class="btn-group" role="group">
+              <button
+                v-on:click="handleComplete(task._id.$oid)"
+                type="button"
+                class="btn btn-success btn-sm"
+              >Complete</button>
+              <button
+                type="button"
+                class="btn btn-dark px-3 btn-sm"
+                v-on:click="handleDelete(task._id.$oid)"
+              >Delete</button>
+              <button
+                type="button"
+                class="btn btn-warning px-3 btn-sm"
+                v-on:click="handleEdit(task._id.$oid)"
+              >Edit</button>
             </div>
-        </div>
-    </div> -->
-    <Footer />
+          <template v-slot:footer>
+            <small>
+              <span v-if="task.done">Yes</span>
+              <span v-else>No</span>
+            </small>
+          </template>
+        </b-card>
+      </b-card-group>
+    </div>
+    <!-- modal -->
+      <b-modal ref="addTaskModal"
+        id="task-modal"
+        title="Add a new task"
+        hide-footer>
+        <b-form @submit="onSubmit" @reset="onReset" class="w-100">
+          <b-form-group id="form-title-group"
+            label="Task:"
+            label-for="form-title-input">
+          <b-form-input id="form-title-input"
+            type="text"
+            v-model="addTaskForm.title"
+            required
+            placeholder="Enter task">
+          </b-form-input>
+          </b-form-group>
+          <b-form-group id="form-description-group"
+            label="Description:"
+            label-for="form-description-input">
+          <b-form-input id="form-description-input"
+            type="text"
+            v-model="addTaskForm.description"
+            required
+            placeholder="Enter description">
+          </b-form-input>
+          </b-form-group>
+        <b-form-group id="form-read-group">
+        </b-form-group>
+        <b-button class="mr-3" type="submit" variant="primary">Submit</b-button>
+        <b-button type="reset" variant="danger">Reset</b-button>
+      </b-form>
+    </b-modal>
+  <Footer />
   </div>
 </template>
 
@@ -86,15 +95,25 @@ export default {
   },
   data() {
     return {
-      username: '',
+      tasks: [],
+      file: null,
+      image: false,
+      addTaskForm: {
+        title: '',
+        description: '',
+        done: [],
+      },
     };
   },
   methods: {
     getUserData() {
-      const path = `http://localhost:5000/users/${this.$route.params.username}`;
+    //   const path = `http://localhost:5000/users/${this.$route.params.username}`;
+      const path = 'http://localhost:5000/todo/api/task/thisuser';
       axios.get(path)
         .then((res) => {
-          this.username = res.data.data.username;
+          this.tasks = res.data;
+        //   this.username = res.data.data.username;
+        //   console.log(res);
         //   this.image = res.data.image_name;
         })
         .catch((error) => {
@@ -102,57 +121,93 @@ export default {
           console.error(error);
         });
     },
-    // submitFile(id) {
-    //   const formData = new FormData();
-    //   formData.append('file', this.file);
-    //   const path = `http://localhost:5000/todo/api/photo/${id}`;
-    //   axios.post(path,
-    //     formData,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'multipart/form-data',
-    //       },
-    //     })
-    //     .then((res) => {
-    //       // eslint-disable-next-line
-    //       console.log('SUCCESS!!');
-    //       // eslint-disable-next-line
-    //       this.image = res.data;
-    //     })
-    //     .catch((error) => {
-    //       // eslint-disable-next-line
-    //       console.log('FAILURE!!', error);
-    //     });
-    // },
-    // onSubmit(evt) {
-    //   evt.preventDefault();
-    //   const path = `http://localhost:5000/todo/api/task/edit/${this.id}`;
-    //   const payload = {
-    //     title: this.form.title,
-    //     description: this.form.description,
-    //   };
-    //   axios.put(path, payload)
-    //     .then((res) => {
-    //       this.title = res.data.result.title;
-    //       this.description = res.data.result.description;
-    //       this.onReset(evt);
-    //     })
-    //     .catch((error) => {
-    //       // eslint-disable-next-line
-    //       console.error(error);
-    //     });
-    // },
-    // onReset(evt) {
-    //   evt.preventDefault();
-    //   // Reset our form values
-    //   this.form.title = '';
-    //   this.form.description = '';
-    //   // Trick to reset/clear native browser form validation state
-    //   this.show = false;
-    //   this.$nextTick(() => {
-    //     this.show = true;
-    //   });
-    // },
+    submitFile() {
+      const formData = new FormData();
+      formData.append('file', this.file);
+      const path = 'http://localhost:5000/todo/api/photo';
+      axios.post(path,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          // eslint-disable-next-line
+          console.log('SUCCESS!!');
+          // eslint-disable-next-line
+          this.image = res.data;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.log('FAILURE!!', error);
+        });
+    },
+    handleFileUpload() {
+      // eslint-disable-next-line
+      this.file = this.$refs.file.files[0];
+    },
+    handleComplete(id) {
+      const path = `http://localhost:5000/todo/api/task/${id}`;
+      axios.put(path)
+        .then((res) => {
+          this.tasks = res.data;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+    },
+    handleDelete(id) {
+      const path = `http://localhost:5000/todo/api/task/delete/${id}`;
+      axios.delete(path)
+        .then((res) => {
+          this.tasks = res.data;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+    },
+    handleEdit(id) {
+      this.$router.push({ name: 'EditItem', params: { id } });
+    },
+    addTask(payload) {
+      const path = 'http://localhost:5000/todo/api/task';
+      axios.post(path, payload)
+        .then(() => {
+          this.getTasks();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.log(error);
+          this.getTasks();
+        });
+    },
+    initForm() {
+      this.addTaskForm.title = '';
+      this.addTaskForm.description = '';
+      this.addTaskForm.done = [];
+    },
+    onSubmit(evt) {
+      evt.preventDefault();
+      this.$refs.addTaskModal.hide();
+      let done = false;
+      if (this.addTaskForm.done[0]) done = true;
+      const payload = {
+        title: this.addTaskForm.title,
+        description: this.addTaskForm.description,
+        token: localStorage.token,
+        done, // property shorthand
+      };
+      this.addTask(payload);
+      this.initForm();
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      this.$refs.addTaskModal.hide();
+      this.initForm();
+    },
   },
   created() {
     this.getUserData();
