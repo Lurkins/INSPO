@@ -27,7 +27,7 @@ export default new VueRouter({
       component: EditItem,
     },
     {
-      path: '/users/:username',
+      path: '/profile',
       name: 'Profile',
       component: Profile,
     },

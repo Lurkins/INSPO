@@ -61,7 +61,7 @@
             <template v-slot:button-content>
                 <em>User</em>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <b-dropdown-item to="/profile">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -101,12 +101,14 @@ export default {
       axios.post(path, payload)
         .then((res) => {
           if (!res.data.data.token) {
+            console.log('the login failed');
             this.loginFailed();
             return;
           }
           localStorage.token = res.data.data.token;
-          const user = res.data.data.username;
-          this.$router.replace(this.$route.query.redirect || `users/${user}`);
+          // const user = res.data.data.username;
+          console.log(res);
+          this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line
           console.log(res);
@@ -133,8 +135,8 @@ export default {
             return;
           }
           localStorage.token = res.data.data.token;
-          const user = res.data.data.username;
-          this.$router.replace(this.$route.query.redirect || `users/${user}`);
+          // const user = res.data.data.username;
+          this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line
           console.log(res);
