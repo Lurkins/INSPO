@@ -4,7 +4,8 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 class="mt-5 pt-5">Tasks</h1>
+          <h1 v-if="tasks" class="mt-5 pt-5">All the Items</h1>
+          <h1 v-else class="mt-5 pt-5">No Items to Display</h1>
         <hr><br><br>
         <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
         <br><br>

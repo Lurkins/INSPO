@@ -4,8 +4,10 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 class="mt-5 pt-5">Tasks</h1>
+        <h1 class="mt-5 pt-5">Welcome to your profile!</h1>
         <hr><br><br>
+        <h2 v-if="tasks.length">Your Items</h2>
+        <h2 v-else class="mt-5 pt-5">No Items to Display</h2>
         <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
         <br><br>
       </div>
@@ -85,7 +87,7 @@
         <b-form-group id="form-read-group">
         </b-form-group>
         <b-button class="mr-3" type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
+        <b-button type="reset" variant="danger">Cancel</b-button>
       </b-form>
     </b-modal>
   <Footer />
