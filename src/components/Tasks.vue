@@ -27,23 +27,6 @@
           <b-card-text>
             {{ task.description }}
           </b-card-text>
-            <div class="btn-group" role="group">
-              <button
-                v-on:click="handleComplete(task._id.$oid)"
-                type="button"
-                class="btn btn-success btn-sm"
-              >Complete</button>
-              <button
-                type="button"
-                class="btn btn-dark px-3 btn-sm"
-                v-on:click="handleDelete(task._id.$oid)"
-              >Delete</button>
-              <button
-                type="button"
-                class="btn btn-warning px-3 btn-sm"
-                v-on:click="handleEdit(task._id.$oid)"
-              >Edit</button>
-            </div>
           <template v-slot:footer>
             <small>
               <span v-if="task.done">Yes</span>
