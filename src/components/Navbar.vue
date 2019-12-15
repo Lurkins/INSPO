@@ -1,7 +1,8 @@
 <template>
     <div>
     <b-navbar class="mb-5" toggleable="lg" type="dark" variant="success" fixed="top">
-        <b-navbar-brand to="/">{{ msg }}</b-navbar-brand>
+        <b-navbar-brand to="/">{{ msg }} <font-awesome-icon :icon="['fa', 'image']" />
+        </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -101,13 +102,11 @@ export default {
       axios.post(path, payload)
         .then((res) => {
           if (!res.data.data.token) {
-            console.log('the login failed');
             this.loginFailed();
             return;
           }
           localStorage.token = res.data.data.token;
           // const user = res.data.data.username;
-          console.log(res);
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line

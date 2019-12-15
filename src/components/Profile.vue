@@ -13,7 +13,20 @@
     </div>
     <div class="container-fluid">
       <b-card-group columns>
-        <b-card bg-variant="light" class="bs-card shadow" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${task.image_name}`" :img-alt="task.title" img-top>
+        <b-card
+            bg-variant="light"
+            class="bs-card shadow"
+            v-for="(task) in tasks"
+            :key="task._id.$oid"
+            :title="task.title"
+            v-bind:img-src="task.image_name
+                ?
+                `http://localhost:5000/file/${task.image_name}`
+                :
+                require('../assets/placeholder-image.png')"
+            :img-alt="task.title"
+            img-top
+        >
           <b-card-text>
             {{ task.description }}
           </b-card-text>
@@ -103,9 +116,8 @@ export default {
   },
   methods: {
     getUserData() {
-    //   const path = `http://localhost:5000/users/${this.$route.params.username}`;
       const path = 'http://localhost:5000/todo/api/task/thisuser';
-      axios.get(path)
+      axios.get(path, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then((res) => {
           this.tasks = res.data;
         //   this.username = res.data.data.username;
@@ -172,12 +184,12 @@ export default {
       const path = 'http://localhost:5000/todo/api/task';
       axios.post(path, payload)
         .then(() => {
-          this.getTasks();
+          this.getUserData();
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.log(error);
-          this.getTasks();
+          this.getUserData();
         });
     },
     initForm() {

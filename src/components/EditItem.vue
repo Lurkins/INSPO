@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <b-img :src="`http://localhost:5000/file/${image}`" alt="task" fluid class="mb-5"></b-img>
+                <b-img :src="image ? `http://localhost:5000/file/${image}` : require('../assets/placeholder-image.png')" alt="task" fluid class="mb-5"></b-img>
             </div>
             <div class="col-md-6">
                 <div>

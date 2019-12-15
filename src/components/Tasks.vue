@@ -13,7 +13,16 @@
     </div>
     <div class="container-fluid">
       <b-card-group columns>
-        <b-card bg-variant="light" class="bs-card shadow" v-for="(task) in tasks" :key="task._id.$oid" :title="task.title" v-bind:img-src="`http://localhost:5000/file/${task.image_name}`" :img-alt="task.title" img-top>
+        <b-card
+          bg-variant="light"
+          class="bs-card shadow"
+          v-for="(task) in tasks"
+          :key="task._id.$oid"
+          :title="task.title"
+          v-bind:img-src="task.image_name ? `http://localhost:5000/file/${task.image_name}` : require('../assets/placeholder-image.png')"
+          :img-alt="task.title"
+          img-top
+        >
           <b-card-text>
             {{ task.description }}
           </b-card-text>
@@ -72,7 +81,7 @@
         <b-form-group id="form-read-group">
         </b-form-group>
         <b-button class="mr-3" type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
+        <b-button type="reset" variant="danger">Cancel</b-button>
       </b-form>
     </b-modal>
     <Carousel />
@@ -107,7 +116,7 @@ export default {
   methods: {
     getTasks() {
       const path = 'http://localhost:5000/todo/api/task';
-      axios.get(path)
+      axios.get(path, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then((res) => {
           this.tasks = res.data;
         })
