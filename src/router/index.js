@@ -5,6 +5,7 @@ import Tasks from '../components/Tasks.vue';
 import Test from '../components/Test.vue';
 import EditItem from '../components/EditItem.vue';
 import Profile from '../components/Profile.vue';
+import MyItems from '../components/MyItems.vue';
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,11 @@ export default new VueRouter({
       path: '/edit/:id',
       name: 'EditItem',
       component: EditItem,
+    },
+    {
+      path: '/myitems',
+      name: 'MyItems',
+      component: MyItems,
     },
     {
       path: '/profile',

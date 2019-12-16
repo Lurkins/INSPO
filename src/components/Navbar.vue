@@ -9,7 +9,7 @@
         <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
             <b-nav-item to="/tasks">All Items</b-nav-item>
-            <b-nav-item href="#">My Items</b-nav-item>
+            <b-nav-item to="/myitems">My Items</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->

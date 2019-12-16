@@ -4,27 +4,51 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-          <h1 v-if="tasks" class="mt-5 pt-5">All the Items</h1>
-          <h1 v-else class="mt-5 pt-5">No Items to Display</h1>
-        <hr>
+        <h1 class="mt-5 pt-5">These are your Items!</h1>
+        <hr><br><br>
+        <h2 v-if="tasks.length">Your Items</h2>
+        <h2 v-else class="mt-5 pt-5">No Items to Display</h2>
+        <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
+        <br><br>
       </div>
     </div>
     </div>
     <div class="container-fluid">
       <b-card-group columns>
         <b-card
-          bg-variant="light"
-          class="shadow"
-          v-for="(task) in tasks"
-          :key="task._id.$oid"
-          :title="task.title"
-          v-bind:img-src="task.image_name ? `http://localhost:5000/file/${task.image_name}` : require('../assets/placeholder-image.png')"
-          :img-alt="task.title"
-          img-top
+            bg-variant="light"
+            class="shadow"
+            v-for="(task) in tasks"
+            :key="task._id.$oid"
+            :title="task.title"
+            v-bind:img-src="task.image_name
+                ?
+                `http://localhost:5000/file/${task.image_name}`
+                :
+                require('../assets/placeholder-image.png')"
+            :img-alt="task.title"
+            img-top
         >
           <b-card-text>
             {{ task.description }}
           </b-card-text>
+            <div class="btn-group" role="group">
+              <button
+                v-on:click="handleComplete(task._id.$oid)"
+                type="button"
+                class="btn btn-success btn-sm"
+              >Complete</button>
+              <button
+                type="button"
+                class="btn btn-dark px-3 btn-sm"
+                v-on:click="handleDelete(task._id.$oid)"
+              >Delete</button>
+              <button
+                type="button"
+                class="btn btn-warning px-3 btn-sm"
+                v-on:click="handleEdit(task._id.$oid)"
+              >Edit</button>
+            </div>
           <template v-slot:footer>
             <small>
               <span v-if="task.done">Yes</span>
@@ -34,14 +58,46 @@
         </b-card>
       </b-card-group>
     </div>
-    <Footer />
+    <!-- modal -->
+      <b-modal ref="addTaskModal"
+        id="task-modal"
+        title="Add a new task"
+        hide-footer>
+        <b-form @submit="onSubmit" @reset="onReset" class="w-100">
+          <b-form-group id="form-title-group"
+            label="Task:"
+            label-for="form-title-input">
+          <b-form-input id="form-title-input"
+            type="text"
+            v-model="addTaskForm.title"
+            required
+            placeholder="Enter task">
+          </b-form-input>
+          </b-form-group>
+          <b-form-group id="form-description-group"
+            label="Description:"
+            label-for="form-description-input">
+          <b-form-input id="form-description-input"
+            type="text"
+            v-model="addTaskForm.description"
+            required
+            placeholder="Enter description">
+          </b-form-input>
+          </b-form-group>
+        <b-form-group id="form-read-group">
+        </b-form-group>
+        <b-button class="mr-3" type="submit" variant="primary">Submit</b-button>
+        <b-button type="reset" variant="danger">Cancel</b-button>
+      </b-form>
+    </b-modal>
+  <Footer />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import Footer from './Footer.vue';
 import Navbar from './Navbar.vue';
+import Footer from './Footer.vue';
 
 export default {
   components: {
@@ -61,11 +117,14 @@ export default {
     };
   },
   methods: {
-    getTasks() {
-      const path = 'http://localhost:5000/todo/api/task';
+    getUserData() {
+      const path = 'http://localhost:5000/todo/api/task/thisuser';
       axios.get(path, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then((res) => {
           this.tasks = res.data;
+        //   this.username = res.data.data.username;
+        //   console.log(res);
+        //   this.image = res.data.image_name;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -127,12 +186,12 @@ export default {
       const path = 'http://localhost:5000/todo/api/task';
       axios.post(path, payload)
         .then(() => {
-          this.getTasks();
+          this.getUserData();
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.log(error);
-          this.getTasks();
+          this.getUserData();
         });
     },
     initForm() {
@@ -161,12 +220,12 @@ export default {
     },
   },
   created() {
-    this.getTasks();
+    this.getUserData();
   },
 };
 </script>
 <style scoped>
-  @media (min-width: 576px) {
+    @media (min-width: 576px) {
     .card-columns {
         column-count: 2;
     }
