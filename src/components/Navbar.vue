@@ -1,7 +1,7 @@
 <template>
     <div>
-    <b-navbar class="mb-5" toggleable="lg" type="dark" variant="success" fixed="top">
-        <b-navbar-brand to="/">{{ msg }} <font-awesome-icon :icon="['fa', 'image']" />
+    <b-navbar class="mb-5" toggleable="lg" type="dark" variant="dark" fixed="top">
+        <b-navbar-brand to="/">{{ msg }} <font-awesome-icon :icon="['fa', 'lightbulb']" />
         </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -80,7 +80,7 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      msg: 'The Inspirator',
+      msg: 'INSPO',
       form: {
         username: '',
         password: '',
