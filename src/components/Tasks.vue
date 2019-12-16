@@ -6,9 +6,7 @@
       <div class="col-12">
           <h1 v-if="tasks" class="mt-5 pt-5">All the Items</h1>
           <h1 v-else class="mt-5 pt-5">No Items to Display</h1>
-        <hr><br><br>
-        <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
-        <br><br>
+        <hr>
       </div>
     </div>
     </div>
@@ -36,40 +34,7 @@
         </b-card>
       </b-card-group>
     </div>
-    <!-- modal -->
-      <b-modal ref="addTaskModal"
-        id="task-modal"
-        title="Add a new task"
-        hide-footer>
-        <b-form @submit="onSubmit" @reset="onReset" class="w-100">
-          <b-form-group id="form-title-group"
-            label="Task:"
-            label-for="form-title-input">
-          <b-form-input id="form-title-input"
-            type="text"
-            v-model="addTaskForm.title"
-            required
-            placeholder="Enter task">
-          </b-form-input>
-          </b-form-group>
-          <b-form-group id="form-description-group"
-            label="Description:"
-            label-for="form-description-input">
-          <b-form-input id="form-description-input"
-            type="text"
-            v-model="addTaskForm.description"
-            required
-            placeholder="Enter description">
-          </b-form-input>
-          </b-form-group>
-        <b-form-group id="form-read-group">
-        </b-form-group>
-        <b-button class="mr-3" type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Cancel</b-button>
-      </b-form>
-    </b-modal>
-    <Carousel />
-  <Footer />
+    <Footer />
   </div>
 </template>
 
@@ -77,13 +42,11 @@
 import axios from 'axios';
 import Footer from './Footer.vue';
 import Navbar from './Navbar.vue';
-import Carousel from './Carousel.vue';
 
 export default {
   components: {
     Footer,
     Navbar,
-    Carousel,
   },
   data() {
     return {

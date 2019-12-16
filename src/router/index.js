@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Home from '../components/Home.vue';
 import Tasks from '../components/Tasks.vue';
 import Test from '../components/Test.vue';
 import EditItem from '../components/EditItem.vue';
@@ -13,6 +14,11 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
+      name: 'Home',
+      component: Home,
+    },
+    {
+      path: '/tasks',
       name: 'Tasks',
       component: Tasks,
     },
