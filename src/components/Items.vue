@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-          <h1 v-if="tasks" class="mt-5 pt-5">All the Items</h1>
+          <h1 v-if="items" class="mt-5 pt-5">All the Items</h1>
           <h1 v-else class="mt-5 pt-5">No Items to Display</h1>
         <hr>
       </div>
@@ -15,19 +15,19 @@
         <b-card
           bg-variant="light"
           class="shadow"
-          v-for="(task) in tasks"
-          :key="task._id.$oid"
-          :title="task.title"
-          v-bind:img-src="task.image_name ? `http://localhost:5000/file/${task.image_name}` : require('../assets/placeholder-image.png')"
-          :img-alt="task.title"
+          v-for="(item) in items"
+          :key="item._id.$oid"
+          :title="item.title"
+          v-bind:img-src="item.image_name ? `http://localhost:5000/file/${item.image_name}` : require('../assets/placeholder-image.png')"
+          :img-alt="item.title"
           img-top
         >
           <b-card-text>
-            {{ task.description }}
+            {{ item.description }}
           </b-card-text>
           <template v-slot:footer>
             <small>
-              <span v-if="task.done">Yes</span>
+              <span v-if="item.done">Yes</span>
               <span v-else>No</span>
             </small>
           </template>
@@ -50,10 +50,10 @@ export default {
   },
   data() {
     return {
-      tasks: [],
+      items: [],
       file: null,
       image: false,
-      addTaskForm: {
+      addItemForm: {
         title: '',
         description: '',
         done: [],
@@ -61,11 +61,11 @@ export default {
     };
   },
   methods: {
-    getTasks() {
-      const path = 'http://localhost:5000/todo/api/task';
+    getItems() {
+      const path = 'http://localhost:5000/todo/api/item';
       axios.get(path, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then((res) => {
-          this.tasks = res.data;
+          this.items = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -99,10 +99,10 @@ export default {
       this.file = this.$refs.file.files[0];
     },
     handleComplete(id) {
-      const path = `http://localhost:5000/todo/api/task/${id}`;
+      const path = `http://localhost:5000/todo/api/item/${id}`;
       axios.put(path)
         .then((res) => {
-          this.tasks = res.data;
+          this.items = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -110,10 +110,10 @@ export default {
         });
     },
     handleDelete(id) {
-      const path = `http://localhost:5000/todo/api/task/delete/${id}`;
+      const path = `http://localhost:5000/todo/api/item/delete/${id}`;
       axios.delete(path)
         .then((res) => {
-          this.tasks = res.data;
+          this.items = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -123,45 +123,45 @@ export default {
     handleEdit(id) {
       this.$router.push({ name: 'EditItem', params: { id } });
     },
-    addTask(payload) {
-      const path = 'http://localhost:5000/todo/api/task';
+    addItem(payload) {
+      const path = 'http://localhost:5000/todo/api/item';
       axios.post(path, payload)
         .then(() => {
-          this.getTasks();
+          this.getItems();
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.log(error);
-          this.getTasks();
+          this.getItems();
         });
     },
     initForm() {
-      this.addTaskForm.title = '';
-      this.addTaskForm.description = '';
-      this.addTaskForm.done = [];
+      this.addItemForm.title = '';
+      this.addItemForm.description = '';
+      this.addItemForm.done = [];
     },
     onSubmit(evt) {
       evt.preventDefault();
-      this.$refs.addTaskModal.hide();
+      this.$refs.addItemModal.hide();
       let done = false;
-      if (this.addTaskForm.done[0]) done = true;
+      if (this.addItemForm.done[0]) done = true;
       const payload = {
-        title: this.addTaskForm.title,
-        description: this.addTaskForm.description,
+        title: this.addItemForm.title,
+        description: this.addItemForm.description,
         token: localStorage.token,
         done, // property shorthand
       };
-      this.addTask(payload);
+      this.addItem(payload);
       this.initForm();
     },
     onReset(evt) {
       evt.preventDefault();
-      this.$refs.addTaskModal.hide();
+      this.$refs.addItemModal.hide();
       this.initForm();
     },
   },
   created() {
-    this.getTasks();
+    this.getItems();
   },
 };
 </script>

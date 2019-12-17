@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../components/Home.vue';
-import Tasks from '../components/Tasks.vue';
+import Items from '../components/Items.vue';
 import Test from '../components/Test.vue';
 import EditItem from '../components/EditItem.vue';
 import Profile from '../components/Profile.vue';
@@ -19,9 +19,9 @@ export default new VueRouter({
       component: Home,
     },
     {
-      path: '/tasks',
-      name: 'Tasks',
-      component: Tasks,
+      path: '/items',
+      name: 'Items',
+      component: Items,
     },
     {
       path: '/test',

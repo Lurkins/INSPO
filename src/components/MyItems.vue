@@ -6,9 +6,9 @@
       <div class="col-12">
         <h1 class="mt-5 pt-5">These are your Items!</h1>
         <hr><br><br>
-        <h2 v-if="tasks.length">Your Items</h2>
+        <h2 v-if="items.length">Your Items</h2>
         <h2 v-else class="mt-5 pt-5">No Items to Display</h2>
-        <button type="button" class="btn btn-success btn-sm" v-b-modal.task-modal>Add Task</button>
+        <button type="button" class="btn btn-success btn-sm" v-b-modal.item-modal>Add Item</button>
         <br><br>
       </div>
     </div>
@@ -18,40 +18,40 @@
         <b-card
             bg-variant="light"
             class="shadow"
-            v-for="(task) in tasks"
-            :key="task._id.$oid"
-            :title="task.title"
-            v-bind:img-src="task.image_name
+            v-for="(item) in items"
+            :key="item._id.$oid"
+            :title="item.title"
+            v-bind:img-src="item.image_name
                 ?
-                `http://localhost:5000/file/${task.image_name}`
+                `http://localhost:5000/file/${item.image_name}`
                 :
                 require('../assets/placeholder-image.png')"
-            :img-alt="task.title"
+            :img-alt="item.title"
             img-top
         >
           <b-card-text>
-            {{ task.description }}
+            {{ item.description }}
           </b-card-text>
             <div class="btn-group" role="group">
               <button
-                v-on:click="handleComplete(task._id.$oid)"
+                v-on:click="handleComplete(item._id.$oid)"
                 type="button"
                 class="btn btn-success btn-sm"
               >Complete</button>
               <button
                 type="button"
                 class="btn btn-dark px-3 btn-sm"
-                v-on:click="handleDelete(task._id.$oid)"
+                v-on:click="handleDelete(item._id.$oid)"
               >Delete</button>
               <button
                 type="button"
                 class="btn btn-warning px-3 btn-sm"
-                v-on:click="handleEdit(task._id.$oid)"
+                v-on:click="handleEdit(item._id.$oid)"
               >Edit</button>
             </div>
           <template v-slot:footer>
             <small>
-              <span v-if="task.done">Yes</span>
+              <span v-if="item.done">Yes</span>
               <span v-else>No</span>
             </small>
           </template>
@@ -59,19 +59,19 @@
       </b-card-group>
     </div>
     <!-- modal -->
-      <b-modal ref="addTaskModal"
-        id="task-modal"
-        title="Add a new task"
+      <b-modal ref="addItemModal"
+        id="item-modal"
+        title="Add a new item"
         hide-footer>
         <b-form @submit="onSubmit" @reset="onReset" class="w-100">
           <b-form-group id="form-title-group"
-            label="Task:"
+            label="Item:"
             label-for="form-title-input">
           <b-form-input id="form-title-input"
             type="text"
-            v-model="addTaskForm.title"
+            v-model="addItemForm.title"
             required
-            placeholder="Enter task">
+            placeholder="Enter item">
           </b-form-input>
           </b-form-group>
           <b-form-group id="form-description-group"
@@ -79,7 +79,7 @@
             label-for="form-description-input">
           <b-form-input id="form-description-input"
             type="text"
-            v-model="addTaskForm.description"
+            v-model="addItemForm.description"
             required
             placeholder="Enter description">
           </b-form-input>
@@ -106,10 +106,10 @@ export default {
   },
   data() {
     return {
-      tasks: [],
+      items: [],
       file: null,
       image: false,
-      addTaskForm: {
+      addItemForm: {
         title: '',
         description: '',
         done: [],
@@ -118,10 +118,10 @@ export default {
   },
   methods: {
     getUserData() {
-      const path = 'http://localhost:5000/todo/api/task/thisuser';
+      const path = 'http://localhost:5000/todo/api/item/thisuser';
       axios.get(path, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then((res) => {
-          this.tasks = res.data;
+          this.items = res.data;
         //   this.username = res.data.data.username;
         //   console.log(res);
         //   this.image = res.data.image_name;
@@ -158,10 +158,10 @@ export default {
       this.file = this.$refs.file.files[0];
     },
     handleComplete(id) {
-      const path = `http://localhost:5000/todo/api/task/${id}`;
+      const path = `http://localhost:5000/todo/api/item/${id}`;
       axios.put(path)
         .then((res) => {
-          this.tasks = res.data;
+          this.items = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -169,10 +169,10 @@ export default {
         });
     },
     handleDelete(id) {
-      const path = `http://localhost:5000/todo/api/task/delete/${id}`;
+      const path = `http://localhost:5000/todo/api/item/delete/${id}`;
       axios.delete(path)
         .then((res) => {
-          this.tasks = res.data;
+          this.items = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -182,9 +182,9 @@ export default {
     handleEdit(id) {
       this.$router.push({ name: 'EditItem', params: { id } });
     },
-    addTask(payload) {
-      const path = 'http://localhost:5000/todo/api/task';
-      axios.post(path, payload)
+    addItem(payload) {
+      const path = 'http://localhost:5000/todo/api/item';
+      axios.post(path, payload, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then(() => {
           this.getUserData();
         })
@@ -195,27 +195,27 @@ export default {
         });
     },
     initForm() {
-      this.addTaskForm.title = '';
-      this.addTaskForm.description = '';
-      this.addTaskForm.done = [];
+      this.addItemForm.title = '';
+      this.addItemForm.description = '';
+      this.addItemForm.done = [];
     },
     onSubmit(evt) {
       evt.preventDefault();
-      this.$refs.addTaskModal.hide();
+      this.$refs.addItemModal.hide();
       let done = false;
-      if (this.addTaskForm.done[0]) done = true;
+      if (this.addItemForm.done[0]) done = true;
       const payload = {
-        title: this.addTaskForm.title,
-        description: this.addTaskForm.description,
+        title: this.addItemForm.title,
+        description: this.addItemForm.description,
         token: localStorage.token,
         done, // property shorthand
       };
-      this.addTask(payload);
+      this.addItem(payload);
       this.initForm();
     },
     onReset(evt) {
       evt.preventDefault();
-      this.$refs.addTaskModal.hide();
+      this.$refs.addItemModal.hide();
       this.initForm();
     },
   },

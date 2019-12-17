@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <b-img :src="image ? `http://localhost:5000/file/${image}` : require('../assets/placeholder-image.png')" alt="task" fluid class="mb-5"></b-img>
+                <b-img :src="image ? `http://localhost:5000/file/${image}` : require('../assets/placeholder-image.png')" :alt=title fluid class="mb-5"></b-img>
             </div>
             <div class="col-md-6">
                 <div>
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     getItemData() {
-      const path = `http://localhost:5000/todo/api/task/id/${this.$route.params.id}`;
+      const path = `http://localhost:5000/todo/api/item/id/${this.$route.params.id}`;
       axios.get(path)
         .then((res) => {
           this.title = res.data.title;
@@ -137,7 +137,7 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
-      const path = `http://localhost:5000/todo/api/task/edit/${this.id}`;
+      const path = `http://localhost:5000/todo/api/item/edit/${this.id}`;
       const payload = {
         title: this.form.title,
         description: this.form.description,
