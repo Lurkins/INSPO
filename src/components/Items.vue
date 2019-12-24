@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     getItems() {
-      const path = 'http://localhost:5000/todo/api/item';
+      const path = `${process.env.VUE_APP_APIURL}/items`;
       axios.get(path, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then((res) => {
           this.items = res.data;
@@ -75,7 +75,7 @@ export default {
     submitFile() {
       const formData = new FormData();
       formData.append('file', this.file);
-      const path = 'http://localhost:5000/todo/api/photo';
+      const path = `${process.env.VUE_APP_APIURL}/photo`;
       axios.post(path,
         formData,
         {
@@ -99,7 +99,7 @@ export default {
       this.file = this.$refs.file.files[0];
     },
     handleComplete(id) {
-      const path = `http://localhost:5000/todo/api/item/${id}`;
+      const path = `${process.env.VUE_APP_APIURL}/items/${id}`;
       axios.put(path)
         .then((res) => {
           this.items = res.data;
@@ -110,7 +110,7 @@ export default {
         });
     },
     handleDelete(id) {
-      const path = `http://localhost:5000/todo/api/item/delete/${id}`;
+      const path = `${process.env.VUE_APP_APIURL}/items/delete/${id}`;
       axios.delete(path)
         .then((res) => {
           this.items = res.data;
@@ -124,7 +124,7 @@ export default {
       this.$router.push({ name: 'EditItem', params: { id } });
     },
     addItem(payload) {
-      const path = 'http://localhost:5000/todo/api/item';
+      const path = `${process.env.VUE_APP_APIURL}/items`;
       axios.post(path, payload)
         .then(() => {
           this.getItems();

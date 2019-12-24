@@ -94,7 +94,7 @@ export default {
     },
     onSubmitLogin(evt) {
       evt.preventDefault();
-      const path = 'http://localhost:5000/auth';
+      const path = `${process.env.VUE_APP_APIURL}/auth`;
       const payload = {
         username: this.form.username,
         password: this.form.password,
@@ -122,7 +122,7 @@ export default {
     },
     onSubmitRegister(evt) {
       evt.preventDefault();
-      const path = 'http://localhost:5000/register';
+      const path = `${process.env.VUE_APP_APIURL}/register`;
       const payload = {
         username: this.form.username,
         password: this.form.password,
