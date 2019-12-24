@@ -13,7 +13,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <b-img :src="image ? `http://localhost:5000/file/${image}` : require('../assets/placeholder-image.png')" :alt=title fluid class="mb-5"></b-img>
+                <b-img :src="image
+                  ?
+                  `${apiUrl}/file/${image}`
+                  :
+                  require('../assets/placeholder-image.png')" :alt=title fluid class="mb-5">
+                </b-img>
             </div>
             <div class="col-md-6">
                 <div>
@@ -96,11 +101,12 @@ export default {
         description: '',
       },
       show: true,
+      apiUrl: process.env.VUE_APP_APIURL,
     };
   },
   methods: {
     getItemData() {
-      const path = `http://localhost:5000/todo/api/item/id/${this.$route.params.id}`;
+      const path = `${this.apiUrl}/items/${this.$route.params.id}`;
       axios.get(path)
         .then((res) => {
           this.title = res.data.title;
@@ -116,7 +122,7 @@ export default {
     submitFile(id) {
       const formData = new FormData();
       formData.append('file', this.file);
-      const path = `http://localhost:5000/todo/api/photo/${id}`;
+      const path = `${this.apiUrl}/items/photos/${id}`;
       axios.post(path,
         formData,
         {
@@ -137,7 +143,7 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
-      const path = `http://localhost:5000/todo/api/item/edit/${this.id}`;
+      const path = `${this.apiUrl}/items/info/${this.id}`;
       const payload = {
         title: this.form.title,
         description: this.form.description,

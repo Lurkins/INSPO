@@ -117,8 +117,6 @@ export default {
           // eslint-disable-next-line
           console.error(error);
         });
-      // eslint-disable-next-line
-      console.log(this.form.username);
     },
     onSubmitRegister(evt) {
       evt.preventDefault();
@@ -145,8 +143,6 @@ export default {
           // eslint-disable-next-line
           console.error(error);
         });
-      // eslint-disable-next-line
-      console.log(this.form.username);
     },
 
   },

@@ -23,7 +23,7 @@
             :title="item.title"
             v-bind:img-src="item.image_name
                 ?
-                `http://localhost:5000/file/${item.image_name}`
+                `${apiUrl}/file/${item.image_name}`
                 :
                 require('../assets/placeholder-image.png')"
             :img-alt="item.title"
@@ -107,18 +107,16 @@ export default {
   data() {
     return {
       items: [],
-      file: null,
-      image: false,
       addItemForm: {
         title: '',
         description: '',
-        done: [],
       },
+      apiUrl: process.env.VUE_APP_APIURL,
     };
   },
   methods: {
     getUserData() {
-      const path = 'http://localhost:5000/todo/api/item/thisuser';
+      const path = `${this.apiUrl}/users/items`;
       axios.get(path, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then((res) => {
           this.items = res.data;
@@ -131,34 +129,8 @@ export default {
           console.error(error);
         });
     },
-    submitFile() {
-      const formData = new FormData();
-      formData.append('file', this.file);
-      const path = 'http://localhost:5000/todo/api/photo';
-      axios.post(path,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((res) => {
-          // eslint-disable-next-line
-          console.log('SUCCESS!!');
-          // eslint-disable-next-line
-          this.image = res.data;
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.log('FAILURE!!', error);
-        });
-    },
-    handleFileUpload() {
-      // eslint-disable-next-line
-      this.file = this.$refs.file.files[0];
-    },
     handleComplete(id) {
-      const path = `http://localhost:5000/todo/api/item/${id}`;
+      const path = `${this.apiUrl}/items/status/${id}`;
       axios.put(path)
         .then((res) => {
           this.items = res.data;
@@ -169,7 +141,7 @@ export default {
         });
     },
     handleDelete(id) {
-      const path = `http://localhost:5000/todo/api/item/delete/${id}`;
+      const path = `${this.apiUrl}/items/${id}`;
       axios.delete(path)
         .then((res) => {
           this.items = res.data;
@@ -183,7 +155,7 @@ export default {
       this.$router.push({ name: 'EditItem', params: { id } });
     },
     addItem(payload) {
-      const path = 'http://localhost:5000/todo/api/item';
+      const path = `${this.apiUrl}/items`;
       axios.post(path, payload, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then(() => {
           this.getUserData();
@@ -197,18 +169,13 @@ export default {
     initForm() {
       this.addItemForm.title = '';
       this.addItemForm.description = '';
-      this.addItemForm.done = [];
     },
     onSubmit(evt) {
       evt.preventDefault();
       this.$refs.addItemModal.hide();
-      let done = false;
-      if (this.addItemForm.done[0]) done = true;
       const payload = {
         title: this.addItemForm.title,
         description: this.addItemForm.description,
-        token: localStorage.token,
-        done, // property shorthand
       };
       this.addItem(payload);
       this.initForm();
