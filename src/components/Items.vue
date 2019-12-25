@@ -1,6 +1,5 @@
 <template>
 <div>
-  <Navbar />
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -10,8 +9,9 @@
       </div>
     </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid container-item">
       <b-card-group columns>
+        <transition-group name="fade" tag="div">
         <b-card
           bg-variant="light"
           class="shadow"
@@ -36,6 +36,7 @@
             </small>
           </template>
         </b-card>
+        </transition-group>
       </b-card-group>
     </div>
     <Footer />
@@ -45,12 +46,10 @@
 <script>
 import axios from 'axios';
 import Footer from './Footer.vue';
-import Navbar from './Navbar.vue';
 
 export default {
   components: {
     Footer,
-    Navbar,
   },
   data() {
     return {
@@ -77,6 +76,21 @@ export default {
 };
 </script>
 <style scoped>
+
+  .container-item {
+    min-height: 70vh;
+  }
+  .fade-enter-active {
+    transition: opacity .5s ease-in-out;
+  }
+
+  .fade-enter-to {
+    opacity: 1;
+  }
+
+  .fade-enter {
+    opacity: 0;
+  }
   @media (min-width: 576px) {
     .card-columns {
         column-count: 2;

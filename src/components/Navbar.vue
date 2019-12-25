@@ -152,4 +152,11 @@ export default {
     .drop-input {
         width: 300px;
     }
+
+    .navbar-dark .navbar-nav .router-link-active {
+      color: greenyellow;
+    }
+    .navbar-dark .router-link-exact-active {
+      color: greenyellow;
+    }
 </style>

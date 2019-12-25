@@ -1,20 +1,20 @@
 <template>
 <div>
-  <Navbar />
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 class="mt-5 pt-5">These are your Items!</h1>
-        <hr><br><br>
-        <h2 v-if="items.length">Your Items</h2>
-        <h2 v-else class="mt-5 pt-5">No Items to Display</h2>
+        <transition name="fade">
+        <h1 v-if="items.length" class="mt-5 pt-5">These are your items.</h1>
+        <!-- <h1 v-else class="mt-5 pt-5">You have no items to display.</h1> -->
+        </transition>
         <button type="button" class="btn btn-success btn-sm" v-b-modal.item-modal>Add Item</button>
-        <br><br>
+        <hr>
       </div>
     </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid container-item">
       <b-card-group columns>
+        <transition-group name="fade" tag="div">
         <b-card
             bg-variant="light"
             class="shadow"
@@ -56,6 +56,7 @@
             </small>
           </template>
         </b-card>
+        </transition-group>
       </b-card-group>
     </div>
     <!-- modal -->
@@ -96,13 +97,11 @@
 
 <script>
 import axios from 'axios';
-import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 
 export default {
   components: {
     Footer,
-    Navbar,
   },
   data() {
     return {
@@ -192,6 +191,20 @@ export default {
 };
 </script>
 <style scoped>
+    .container-item {
+      min-height: 70vh;
+    }
+    .fade-enter-active {
+      transition: opacity .5s ease-in-out;
+    }
+
+    .fade-enter-to {
+      opacity: 1;
+    }
+
+    .fade-enter {
+      opacity: 0;
+    }
     @media (min-width: 576px) {
     .card-columns {
         column-count: 2;

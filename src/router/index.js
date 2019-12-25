@@ -2,10 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../components/Home.vue';
 import Items from '../components/Items.vue';
+import MyItems from '../components/MyItems.vue';
 import Test from '../components/Test.vue';
 import EditItem from '../components/EditItem.vue';
 import Profile from '../components/Profile.vue';
-import MyItems from '../components/MyItems.vue';
 
 Vue.use(VueRouter);
 
