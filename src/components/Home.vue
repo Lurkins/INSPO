@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <Carousel />
     <b-container class="bv-example-row">
         <b-row class="my-5">
@@ -74,13 +73,11 @@
 </template>
 <script>
 import Footer from './Footer.vue';
-import Navbar from './Navbar.vue';
 import Carousel from './Carousel.vue';
 
 export default {
   components: {
     Footer,
-    Navbar,
     Carousel,
   },
   data() {

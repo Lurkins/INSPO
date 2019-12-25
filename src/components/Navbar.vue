@@ -59,7 +59,10 @@
 
             <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
-            <template v-slot:button-content>
+            <template v-if="isLoggedIn" v-slot:button-content>
+                <em>{{currentUser}}</em>
+            </template>
+            <template v-else v-slot:button-content>
                 <em>User</em>
             </template>
             <b-dropdown-item to="/profile">Profile</b-dropdown-item>
@@ -81,6 +84,8 @@ export default {
   data() {
     return {
       msg: 'INSPO',
+      isLoggedIn: false,
+      currentUser: '',
       form: {
         username: '',
         password: '',
@@ -106,7 +111,9 @@ export default {
             return;
           }
           localStorage.token = res.data.data.token;
-          // const user = res.data.data.username;
+          this.isLoggedIn = true;
+          this.currentUser = res.data.data.username;
+
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line
@@ -132,7 +139,8 @@ export default {
             return;
           }
           localStorage.token = res.data.data.token;
-          // const user = res.data.data.username;
+          this.isLoggedIn = true;
+          this.currentUser = res.data.data.username;
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line

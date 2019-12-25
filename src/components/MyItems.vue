@@ -5,7 +5,7 @@
       <div class="col-12">
         <transition name="fade">
         <h1 v-if="items.length" class="mt-5 pt-5">These are your items.</h1>
-        <!-- <h1 v-else class="mt-5 pt-5">You have no items to display.</h1> -->
+        <h1 v-else class="mt-5 pt-5">You have no items to display.</h1>
         </transition>
         <button type="button" class="btn btn-success btn-sm" v-b-modal.item-modal>Add Item</button>
         <hr>

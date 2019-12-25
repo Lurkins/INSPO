@@ -1,6 +1,5 @@
 <template>
 <div>
-  <Navbar />
     <div class="container mt-5 py-5">
         <b-img v-bind="mainProps" rounded="circle" alt="Circle image"></b-img>
         <h1>User Name</h1>
@@ -19,12 +18,10 @@
 <script>
 // import axios from 'axios';
 import Footer from './Footer.vue';
-import Navbar from './Navbar.vue';
 
 export default {
   components: {
     Footer,
-    Navbar,
   },
   data() {
     return {
