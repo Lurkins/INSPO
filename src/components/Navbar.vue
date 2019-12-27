@@ -17,28 +17,31 @@
             <b-nav-item-dropdown text="Login" right>
                 <b-dropdown-form class="p-3">
                     <h5>Login to existing account</h5>
-                    <label class="sr-only" for="inline-form-input-username">Username</label>
+                    <label class="sr-only" for="inline-form-input-login-username">Username</label>
                     <b-input
-                        id="inline-form-input-username"
+                        id="inline-form-input-login-username"
                         class="mb-2 drop-input"
                         placeholder="Username"
                         v-model="form.username"
                     ></b-input>
 
-                    <label class="sr-only" for="inline-form-input-password">Password</label>
+                    <label class="sr-only" for="inline-form-input-login-password">Password</label>
                     <b-input
-                        id="inline-form-input-password"
+                        id="inline-form-input-login-password"
                         v-model="form.password"
                         placeholder="Password"
                         class="mb-2 mb-2 drop-input"
                     ></b-input>
-                    <b-button @click="onSubmitLogin" variant="primary">Login</b-button>
+                    <b-button @click="login" variant="primary">Login</b-button>
                 </b-dropdown-form>
             </b-nav-item-dropdown>
             <b-nav-item-dropdown text="Register" right>
                 <b-dropdown-form class="p-3">
                     <h5>Register New User</h5>
-                    <label class="sr-only" for="inline-form-input-username">Username</label>
+                    <label
+                      class="sr-only"
+                      for="inline-form-input-register-username"
+                    >Username</label>
                     <b-input
                         id="inline-form-input-username"
                         class="mb-2 drop-input"
@@ -46,21 +49,24 @@
                         v-model="form.username"
                     ></b-input>
 
-                    <label class="sr-only" for="inline-form-input-password">Password</label>
+                    <label
+                      class="sr-only"
+                      for="inline-form-input-register-password"
+                    >Password</label>
                     <b-input
                         id="inline-form-input-password"
                         v-model="form.password"
                         placeholder="Password"
                         class="mb-2 drop-input"
                     ></b-input>
-                    <b-button @click="onSubmitRegister" variant="primary">Register</b-button>
+                    <b-button @click="register" variant="primary">Register</b-button>
                 </b-dropdown-form>
             </b-nav-item-dropdown>
 
             <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template v-if="isLoggedIn" v-slot:button-content>
-                <em>{{currentUser}}</em>
+                <em>{{ currentUser }}</em>
             </template>
             <template v-else v-slot:button-content>
                 <em>User</em>
@@ -81,11 +87,10 @@ axios.defaults.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
 
 export default {
   name: 'Navbar',
+  props: ['currentUser', 'isLoggedIn'],
   data() {
     return {
       msg: 'INSPO',
-      isLoggedIn: false,
-      currentUser: '',
       form: {
         username: '',
         password: '',
@@ -93,66 +98,26 @@ export default {
     };
   },
   methods: {
+    login() {
+      const payload = {
+        username: this.form.username,
+        password: this.form.password,
+      };
+      this.$emit('login', payload);
+      this.initForm();
+    },
+    register() {
+      const payload = {
+        username: this.form.username,
+        password: this.form.password,
+      };
+      this.$emit('register', payload);
+      this.initForm();
+    },
     initForm() {
-      this.username = '';
-      this.password = '';
+      this.form.username = '';
+      this.form.password = '';
     },
-    onSubmitLogin(evt) {
-      evt.preventDefault();
-      const path = `${process.env.VUE_APP_APIURL}/auth`;
-      const payload = {
-        username: this.form.username,
-        password: this.form.password,
-      };
-      axios.post(path, payload)
-        .then((res) => {
-          if (!res.data.data.token) {
-            this.loginFailed();
-            return;
-          }
-          localStorage.token = res.data.data.token;
-          this.isLoggedIn = true;
-          this.currentUser = res.data.data.username;
-
-          this.$router.replace(this.$route.query.redirect || '/profile');
-          this.error = false;
-          // eslint-disable-next-line
-          console.log(res);
-        //   this.onReset(evt);
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
-    },
-    onSubmitRegister(evt) {
-      evt.preventDefault();
-      const path = `${process.env.VUE_APP_APIURL}/register`;
-      const payload = {
-        username: this.form.username,
-        password: this.form.password,
-      };
-      axios.post(path, payload)
-        .then((res) => {
-          if (!res.data.data.token) {
-            this.loginFailed();
-            return;
-          }
-          localStorage.token = res.data.data.token;
-          this.isLoggedIn = true;
-          this.currentUser = res.data.data.username;
-          this.$router.replace(this.$route.query.redirect || '/profile');
-          this.error = false;
-          // eslint-disable-next-line
-          console.log(res);
-        //   this.onReset(evt);
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
-    },
-
   },
 };
 </script>

@@ -114,14 +114,11 @@ export default {
     };
   },
   methods: {
-    getUserData() {
+    getUserItems() {
       const path = `${this.apiUrl}/users/items`;
       axios.get(path, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then((res) => {
           this.items = res.data;
-        //   this.username = res.data.data.username;
-        //   console.log(res);
-        //   this.image = res.data.image_name;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -157,12 +154,12 @@ export default {
       const path = `${this.apiUrl}/items`;
       axios.post(path, payload, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         .then(() => {
-          this.getUserData();
+          this.getUserItems();
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.log(error);
-          this.getUserData();
+          this.getUserItems();
         });
     },
     initForm() {
@@ -186,7 +183,7 @@ export default {
     },
   },
   created() {
-    this.getUserData();
+    this.getUserItems();
   },
 };
 </script>

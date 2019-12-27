@@ -42,6 +42,7 @@ export default new VueRouter({
       path: '/profile',
       name: 'Profile',
       component: Profile,
+      props: true,
     },
   ],
   // eslint-disable-next-line

@@ -11,31 +11,31 @@
     </div>
     <div class="container-fluid container-item">
       <b-card-group columns>
-        <transition-group name="fade" tag="div">
-        <b-card
-          bg-variant="light"
-          class="shadow"
-          v-for="(item) in items"
-          :key="item._id.$oid"
-          :title="item.title"
-          v-bind:img-src="item.image_name
-            ?
-            `${apiUrl}/file/${item.image_name}`
-            :
-            require('../assets/placeholder-image.png')"
-          :img-alt="item.title"
-          img-top
-        >
-          <b-card-text>
-            {{ item.description }}
-          </b-card-text>
-          <template v-slot:footer>
-            <small>
-              <span v-if="item.done">Yes</span>
-              <span v-else>No</span>
-            </small>
-          </template>
-        </b-card>
+        <transition-group name="fade">
+          <b-card
+            bg-variant="light"
+            class="shadow"
+            v-for="(item) in items"
+            :key="item._id.$oid"
+            :title="item.title"
+            v-bind:img-src="item.image_name
+              ?
+              `${apiUrl}/file/${item.image_name}`
+              :
+              require('../assets/placeholder-image.png')"
+            :img-alt="item.title"
+            img-top
+          >
+            <b-card-text>
+              {{ item.description }}
+            </b-card-text>
+            <template v-slot:footer>
+              <small>
+                <span v-if="item.done">Yes</span>
+                <span v-else>No</span>
+              </small>
+            </template>
+          </b-card>
         </transition-group>
       </b-card-group>
     </div>
