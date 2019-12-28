@@ -7,7 +7,12 @@
       :isLoggedIn="isLoggedIn"
     />
     <transition name="fade-slide-up" mode="out-in">
-      <router-view :currentUser="currentUser" :isLoggedIn="isLoggedIn"/>
+      <router-view
+        :currentUser="currentUser"
+        :isLoggedIn="isLoggedIn"
+        :userImage="userImage"
+        :currentUserId="currentUserId"
+      />
     </transition>
   </div>
 </template>
@@ -24,6 +29,8 @@ export default {
     return {
       isLoggedIn: false,
       currentUser: '',
+      currentUserId: '',
+      userImage: '',
     };
   },
   methods: {
@@ -34,7 +41,9 @@ export default {
           .then((res) => {
             this.isLoggedIn = true;
             this.currentUser = res.data.username;
-          //   this.image = res.data.image_name;
+            // eslint-disable-next-line
+            this.currentUserId = res.data._id.$oid;
+            this.userImage = res.data.image_name;
           })
           .catch((error) => {
             // eslint-disable-next-line
@@ -56,6 +65,7 @@ export default {
           localStorage.token = res.data.data.token;
           this.isLoggedIn = true;
           this.currentUser = res.data.data.username;
+          this.userImage = res.data.image_name;
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line
@@ -78,6 +88,7 @@ export default {
           localStorage.token = res.data.data.token;
           this.isLoggedIn = true;
           this.currentUser = res.data.data.username;
+          this.userImage = res.data.image_name;
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line
