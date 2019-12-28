@@ -125,6 +125,7 @@ export default {
         {
           headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.token}`,
           },
         })
         .then((res) => {
@@ -147,6 +148,7 @@ export default {
       };
       axios.put(path, payload)
         .then((res) => {
+          console.log(res);
           this.title = res.data.result.title;
           this.description = res.data.result.description;
           this.onReset(evt);

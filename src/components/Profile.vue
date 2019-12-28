@@ -3,16 +3,16 @@
     <div class="container mt-5 py-5">
         <div class="row">
             <div class="col-md-6">
-                <b-img v-bind=mainProps
+                <b-img
                   rounded="circle"
                   :src="userImage
                   ?
                   `${apiUrl}/file/${userImage}`
                   :
                   require('../assets/placeholder-image.png')"
-                  :alt=username
+                  :alt=currentUser
                   fluid
-                  class="mb-5"
+                  class="mb-5 profile-pic"
                 >
                 </b-img>
                 <h1>{{ currentUser }}</h1>
@@ -24,7 +24,7 @@
                             <b-form-file id="file" v-model="file" class="mb-5">
                             </b-form-file>
                             <button
-                                v-on:click="submitFile(`${currentUserId}`)"
+                                @click="submitFile()"
                                 type="button"
                                 class="btn btn-primary px-3">Submit
                             </button>
@@ -39,21 +39,16 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Footer from './Footer.vue';
 
 export default {
   components: {
     Footer,
   },
-  props: ['currentUser', 'isLoggedIn', 'currentUserId', 'userImage'],
+  props: ['currentUser', 'currentUserId', 'userImage'],
   data() {
     return {
-      // username: '',
-      // userId: this.currentUserId,
-      // id: '',
-      // file: null,
-      // image: false,
+      file: null,
       mainProps: {
         blank: false, blankColor: '#777', width: 300, height: 300, class: 'm1 mb-3',
       },
@@ -61,30 +56,21 @@ export default {
     };
   },
   methods: {
-    submitFile(userId) {
-      const formData = new FormData();
-      formData.append('file', this.file);
-      const path = `${this.apiUrl}/users/photos/${userId}`;
-      axios.post(path,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((res) => {
-          // eslint-disable-next-line
-          console.log('SUCCESS!!');
-          // eslint-disable-next-line
-          this.image = res.data;
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.log('FAILURE!!', error);
-        });
+    submitFile() {
+      const payload = {
+        userId: this.currentUserId,
+        file: this.file,
+      };
+      this.$emit('submitFile', payload);
     },
   },
 };
 </script>
 <style scoped>
+  .profile-pic {
+    background-color: #777;
+    width: 300px;
+    height: 300px;
+  }
+
 </style>

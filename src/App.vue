@@ -4,6 +4,7 @@
       @login="onSubmitLogin($event)"
       @register="onSubmitRegister($event)"
       :currentUser="currentUser"
+      :userImage="userImage"
       :isLoggedIn="isLoggedIn"
     />
     <transition name="fade-slide-up" mode="out-in">
@@ -12,6 +13,7 @@
         :isLoggedIn="isLoggedIn"
         :userImage="userImage"
         :currentUserId="currentUserId"
+        @submitFile="updateUserImage($event)"
       />
     </transition>
   </div>
@@ -64,12 +66,16 @@ export default {
           }
           localStorage.token = res.data.data.token;
           this.isLoggedIn = true;
+          // eslint-disable-next-line
+          console.log("Successful Login", res);
+          // eslint-disable-next-line
+          this.currentUserId = res.data.data._id;
           this.currentUser = res.data.data.username;
-          this.userImage = res.data.image_name;
+          this.userImage = res.data.data.image_name;
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line
-          console.log(res);
+          console.log("Successful Login", res);
         //   this.onReset(evt);
         })
         .catch((error) => {
@@ -85,10 +91,13 @@ export default {
             this.loginFailed();
             return;
           }
+          console.log(res);
           localStorage.token = res.data.data.token;
           this.isLoggedIn = true;
+          // eslint-disable-next-line
+          this.currentUserId = res.data.data._id;
           this.currentUser = res.data.data.username;
-          this.userImage = res.data.image_name;
+          this.userImage = res.data.data.image_name;
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
           // eslint-disable-next-line
@@ -98,6 +107,30 @@ export default {
         .catch((error) => {
           // eslint-disable-next-line
           console.error(error);
+        });
+    },
+    updateUserImage(imageData) {
+      const formData = new FormData();
+      formData.append('file', imageData.file);
+      const path = `${process.env.VUE_APP_APIURL}/users/photos/${imageData.userId}`;
+      axios.post(path,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.token}`,
+          },
+        })
+        .then((res) => {
+          // eslint-disable-next-line
+          console.log('SUCCESS!!');
+          console.log(res);
+          // eslint-disable-next-line
+          this.userImage = res.data;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.log('FAILURE!!', error);
         });
     },
   },

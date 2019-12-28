@@ -66,7 +66,12 @@
             <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template v-if="isLoggedIn" v-slot:button-content>
-                <em>{{ currentUser }}</em>
+                <b-img
+                  :src="`${apiUrl}/file/${userImage}`"
+                  :alt="currentUser"
+                  class="nav-user-icon"
+                  rounded="circle"
+                ></b-img>
             </template>
             <template v-else v-slot:button-content>
                 <em>User</em>
@@ -87,7 +92,7 @@ axios.defaults.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
 
 export default {
   name: 'Navbar',
-  props: ['currentUser', 'isLoggedIn'],
+  props: ['currentUser', 'userImage', 'isLoggedIn'],
   data() {
     return {
       msg: 'INSPO',
@@ -95,6 +100,7 @@ export default {
         username: '',
         password: '',
       },
+      apiUrl: process.env.VUE_APP_APIURL,
     };
   },
   methods: {
@@ -131,5 +137,10 @@ export default {
     }
     .navbar-dark .router-link-exact-active {
       color: greenyellow;
+    }
+
+    .nav-user-icon {
+      height: 30px;
+      width: 30px;
     }
 </style>
