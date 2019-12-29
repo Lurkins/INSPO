@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Carousel />
+    <TheHero />
+    <!-- <Carousel /> -->
     <b-container class="bv-example-row">
         <b-row class="my-5">
             <b-col>
@@ -17,7 +18,7 @@
             </b-col>
         </b-row>
     </b-container>
-    <div class="bg-warning">
+    <div class="section-2">
         <b-container class="bv-example-row">
             <b-row class="mt-5">
                 <b-col>
@@ -34,7 +35,7 @@
             </b-row>
         </b-container>
     </div>
-    <div class="bg-info">
+    <div class="section-3">
         <b-container class="bv-example-row">
             <b-row>
                 <b-col>
@@ -51,7 +52,7 @@
             </b-row>
         </b-container>
     </div>
-    <div class="bg-warning">
+    <div class="section-4">
         <b-container class="bv-example-row">
             <b-row>
                 <b-col>
@@ -73,12 +74,14 @@
 </template>
 <script>
 import Footer from './Footer.vue';
-import Carousel from './Carousel.vue';
+// import Carousel from './Carousel.vue';
+import TheHero from './TheHero.vue';
 
 export default {
   components: {
     Footer,
-    Carousel,
+    // Carousel,
+    TheHero,
   },
   data() {
     return {
@@ -95,6 +98,16 @@ export default {
 <style scoped>
 .icon {
     font-size: 6em;
+}
+
+.section-2 {
+    background:rgb(137, 173, 82);
+}
+.section-3 {
+    background:chartreuse;
+}
+.section-4 {
+    background: greenyellow;
 }
 
 </style>

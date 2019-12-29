@@ -1,6 +1,6 @@
 <template>
     <div>
-    <b-navbar class="mb-5" toggleable="lg" type="dark" variant="dark" fixed="top">
+    <b-navbar class="mb-5 navbar" toggleable="lg" type="dark" fixed="top">
         <b-navbar-brand to="/">{{ msg }} <font-awesome-icon :icon="['fa', 'lightbulb']" />
         </b-navbar-brand>
 
@@ -128,19 +128,22 @@ export default {
 };
 </script>
 <style scoped>
-    .drop-input {
-        width: 300px;
-    }
+  .navbar {
+    background: rgb(31, 20, 10)
+  }
+  .drop-input {
+      width: 300px;
+  }
 
-    .navbar-dark .navbar-nav .router-link-active {
-      color: greenyellow;
-    }
-    .navbar-dark .router-link-exact-active {
-      color: greenyellow;
-    }
+  .navbar-dark .navbar-nav .router-link-active {
+    color: greenyellow;
+  }
+  .navbar-dark .router-link-exact-active {
+    color: greenyellow;
+  }
 
-    .nav-user-icon {
-      height: 30px;
-      width: 30px;
-    }
+  .nav-user-icon {
+    height: 30px;
+    width: 30px;
+  }
 </style>
