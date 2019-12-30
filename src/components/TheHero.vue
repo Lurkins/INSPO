@@ -5,7 +5,7 @@
                 {{ msg }}
             </h6>
             <p>Grow your ideas.</p>
-            <b-button pill variant="success">Sign Up</b-button>
+            <b-button pill variant="success" size="lg">Sign Up</b-button>
         </div>
         <img class="hero-img w-100" src="../assets/inspo-hero.jpg" alt="">
     </header>

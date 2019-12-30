@@ -22,15 +22,10 @@
         <b-container class="bv-example-row">
             <b-row class="mt-5">
                 <b-col>
-                    <h3 class="my-5">Get you creativity flowing.</h3>
+                    <h3 class="my-5 text-light">Get you creativity flowing.</h3>
                 </b-col>
                 <b-col>
-                    <b-img
-                        class="my-5"
-                        v-bind="mainProps"
-                        rounded="circle"
-                        alt="Circle image"
-                    ></b-img>
+
                 </b-col>
             </b-row>
         </b-container>
@@ -101,7 +96,12 @@ export default {
 }
 
 .section-2 {
-    background:rgb(137, 173, 82);
+    background-color:rgb(137, 173, 82);
+    background-image: url('~@/assets/creative-flow.jpg');
+    height: 400px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
 }
 .section-3 {
     background:chartreuse;

@@ -17,12 +17,17 @@
             <b-nav-item-dropdown text="Login" right>
                 <b-dropdown-form class="p-3">
                     <h5>Login to existing account</h5>
+                    <b-alert
+                      :show="this.loginError"
+                      variant="danger"
+                    >Invalid login credentials.</b-alert>
                     <label class="sr-only" for="inline-form-input-login-username">Username</label>
                     <b-input
                         id="inline-form-input-login-username"
                         class="mb-2 drop-input"
                         placeholder="Username"
                         v-model="form.username"
+                        required
                     ></b-input>
 
                     <label class="sr-only" for="inline-form-input-login-password">Password</label>
@@ -31,6 +36,7 @@
                         v-model="form.password"
                         placeholder="Password"
                         class="mb-2 mb-2 drop-input"
+                        required
                     ></b-input>
                     <b-button @click="login" variant="primary">Login</b-button>
                 </b-dropdown-form>
@@ -38,6 +44,11 @@
             <b-nav-item-dropdown text="Register" right>
                 <b-dropdown-form class="p-3">
                     <h5>Register New User</h5>
+                    <b-alert
+                      :show="this.registrationError"
+                      variant="danger"
+                    >Registration failed. Make sure password is at least 5 characters.
+                    </b-alert>
                     <label
                       class="sr-only"
                       for="inline-form-input-register-username"
@@ -47,6 +58,7 @@
                         class="mb-2 drop-input"
                         placeholder="Username"
                         v-model="form.username"
+                        required
                     ></b-input>
 
                     <label
@@ -58,6 +70,7 @@
                         v-model="form.password"
                         placeholder="Password"
                         class="mb-2 drop-input"
+                        required
                     ></b-input>
                     <b-button @click="register" variant="primary">Register</b-button>
                 </b-dropdown-form>
@@ -74,7 +87,11 @@
                 ></b-img>
             </template>
             <template v-else v-slot:button-content>
-                <em>User</em>
+              <font-awesome-icon
+                class="nav-placeholder-user-icon"
+                :icon="['fa', 'user-circle']"
+              />
+              <!-- <em>User</em> -->
             </template>
             <b-dropdown-item to="/profile">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
@@ -92,7 +109,7 @@ axios.defaults.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
 
 export default {
   name: 'Navbar',
-  props: ['currentUser', 'userImage', 'isLoggedIn'],
+  props: ['currentUser', 'userImage', 'isLoggedIn', 'loginError', 'registrationError'],
   data() {
     return {
       msg: 'INSPO',
@@ -135,15 +152,15 @@ export default {
       width: 300px;
   }
 
-  .navbar-dark .navbar-nav .router-link-active {
-    color: greenyellow;
-  }
-  .navbar-dark .router-link-exact-active {
-    color: greenyellow;
+  .navbar-dark .navbar-nav .router-link-active, .navbar-dark .router-link-exact-active {
+    color: #5cb85c
   }
 
   .nav-user-icon {
     height: 30px;
     width: 30px;
+  }
+  .nav-placeholder-user-icon {
+    font-size: 1.5em;
   }
 </style>

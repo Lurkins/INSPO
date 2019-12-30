@@ -6,6 +6,8 @@
       :currentUser="currentUser"
       :userImage="userImage"
       :isLoggedIn="isLoggedIn"
+      :loginError="loginError"
+      :registrationError="registrationError"
     />
     <transition name="fade-slide-up" mode="out-in">
       <router-view
@@ -33,6 +35,8 @@ export default {
       currentUser: '',
       currentUserId: '',
       userImage: '',
+      loginError: false,
+      registrationError: false,
     };
   },
   methods: {
@@ -74,6 +78,7 @@ export default {
           this.userImage = res.data.data.image_name;
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.error = false;
+          this.loginError = false;
           // eslint-disable-next-line
           console.log("Successful Login", res);
         //   this.onReset(evt);
@@ -81,6 +86,7 @@ export default {
         .catch((error) => {
           // eslint-disable-next-line
           console.error(error);
+          this.loginError = true;
         });
     },
     onSubmitRegister(payload) {
@@ -99,7 +105,7 @@ export default {
           this.currentUser = res.data.data.username;
           this.userImage = res.data.data.image_name;
           this.$router.replace(this.$route.query.redirect || '/profile');
-          this.error = false;
+          this.registrationError = false;
           // eslint-disable-next-line
           console.log(res);
         //   this.onReset(evt);
@@ -107,7 +113,11 @@ export default {
         .catch((error) => {
           // eslint-disable-next-line
           console.error(error);
+          this.registrationError = true;
         });
+    },
+    loginFailed() {
+      this.loginError = true;
     },
     updateUserImage(imageData) {
       const formData = new FormData();
