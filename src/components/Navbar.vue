@@ -153,7 +153,7 @@ export default {
   }
 
   .navbar-dark .navbar-nav .router-link-active, .navbar-dark .router-link-exact-active {
-    color: #5cb85c
+    color: #5cb85c;
   }
 
   .nav-user-icon {

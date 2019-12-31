@@ -19,50 +19,39 @@
         </b-row>
     </b-container>
     <div class="section-2">
-        <b-container class="bv-example-row">
-            <b-row class="mt-5">
-                <b-col>
-                    <h3 class="my-5 text-light">Get you creativity flowing.</h3>
-                </b-col>
+        <h3 class="p-3 section-heading-bg text-light text-left display-4">
+            Get creative.
+        </h3>
+        <!-- <b-container class="bv-example-row">
+            <b-row>
                 <b-col>
 
                 </b-col>
             </b-row>
-        </b-container>
+        </b-container> -->
     </div>
     <div class="section-3">
-        <b-container class="bv-example-row">
+        <h3 class="p-3 section-heading-bg text-light text-left display-4">
+            See what's inspiring others.
+        </h3>
+        <!-- <b-container class="bv-example-row">
             <b-row>
                 <b-col>
-                    <b-img
-                        class="my-5"
-                        v-bind="mainProps"
-                        rounded="circle"
-                        alt="Circle image"
-                    ></b-img>
-                </b-col>
-                <b-col>
-                    <h3 class="my-5">See what's inspiring others.</h3>
                 </b-col>
             </b-row>
-        </b-container>
+        </b-container> -->
     </div>
     <div class="section-4">
-        <b-container class="bv-example-row">
+        <h3 class="p-3 section-heading-bg text-light text-left display-4">
+            Create something great.
+        </h3>
+        <!-- <b-container class="bv-example-row">
             <b-row>
                 <b-col>
-                    <h3 class="my-5">Make make something great.</h3>
-                </b-col>
-                <b-col>
-                    <b-img
-                        class="my-5"
-                        v-bind="mainProps"
-                        rounded="circle"
-                        alt="Circle image"
-                    ></b-img>
+                    <h3 class="my-5 display-4 text-left text-light">Create something great.</h3>
                 </b-col>
             </b-row>
-        </b-container>
+        </b-container> -->
     </div>
     <Footer />
   </div>
@@ -96,18 +85,30 @@ export default {
 }
 
 .section-2 {
-    background-color:rgb(137, 173, 82);
-    background-image: url('~@/assets/creative-flow.jpg');
-    height: 400px;
+    background-color:white;
+    background-image: url('~@/assets/creative.jpg');
+    height: 100vh;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
+    background-position: center;
+    background-size: cover;
 }
 .section-3 {
-    background:chartreuse;
+    background-image: url('~@/assets/others.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 .section-4 {
-    background: greenyellow;
+    background-image: url('~@/assets/make.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.section-heading-bg {
+    background-color:#5cb85c;;
 }
 
 </style>
