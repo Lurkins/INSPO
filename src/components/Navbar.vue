@@ -146,14 +146,15 @@ export default {
 </script>
 <style scoped>
   .navbar {
-    background: rgb(31, 20, 10)
+    background: rgb(31, 20, 10);
+    border-bottom: solid greenyellow 7px;
   }
   .drop-input {
       width: 300px;
   }
 
   .navbar-dark .navbar-nav .router-link-active, .navbar-dark .router-link-exact-active {
-    color: #5cb85c;
+    color: greenyellow;
   }
 
   .nav-user-icon {

@@ -19,7 +19,7 @@
         </b-row>
     </b-container>
     <div class="section-2">
-        <h3 class="p-3 section-heading-bg text-light text-left display-4">
+        <h3 class="p-3 section-heading text-left">
             Get creative.
         </h3>
         <!-- <b-container class="bv-example-row">
@@ -31,7 +31,7 @@
         </b-container> -->
     </div>
     <div class="section-3">
-        <h3 class="p-3 section-heading-bg text-light text-left display-4">
+        <h3 class="p-3 section-heading text-left">
             See what's inspiring others.
         </h3>
         <!-- <b-container class="bv-example-row">
@@ -42,7 +42,7 @@
         </b-container> -->
     </div>
     <div class="section-4">
-        <h3 class="p-3 section-heading-bg text-light text-left display-4">
+        <h3 class="p-3 section-heading text-left">
             Create something great.
         </h3>
         <!-- <b-container class="bv-example-row">
@@ -82,6 +82,7 @@ export default {
 <style scoped>
 .icon {
     font-size: 6em;
+    color: rgb(128, 124, 0);
 }
 
 .section-2 {
@@ -107,8 +108,16 @@ export default {
     background-size: cover;
 }
 
-.section-heading-bg {
-    background-color:#5cb85c;;
+.section-heading {
+    background: rgb(196, 213, 42);
+    color: rgb(0, 0, 0);
+    font-size: 2.5em;
+    font-weight: lighter;
+    border-top: solid 9px rgb(75, 255, 237);
 }
+
+
+p {font-size: 1.2em;}
+
 
 </style>
