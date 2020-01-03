@@ -82,7 +82,7 @@ export default {
 <style scoped>
 .icon {
     font-size: 6em;
-    color: rgb(128, 124, 0);
+    color: rgb(31, 20, 10);;
 }
 
 .section-2 {
@@ -109,11 +109,11 @@ export default {
 }
 
 .section-heading {
-    background: rgb(196, 213, 42);
-    color: rgb(0, 0, 0);
+    background: rgba(31, 20, 10, 0.762);
+    color: #D62EFF;
     font-size: 2.5em;
-    font-weight: lighter;
-    border-top: solid 9px rgb(75, 255, 237);
+    font-weight: 300;
+    /* border-top: solid 9px greenyellow; */
 }
 
 

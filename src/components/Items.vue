@@ -29,12 +29,12 @@
             <b-card-text>
               {{ item.description }}
             </b-card-text>
-            <template v-slot:footer>
+            <!-- <template v-slot:footer>
               <small>
                 <span v-if="item.done">Yes</span>
                 <span v-else>No</span>
               </small>
-            </template>
+            </template> -->
           </b-card>
         </transition-group>
       </b-card-group>

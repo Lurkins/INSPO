@@ -14,7 +14,7 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-nav-item-dropdown text="Login" right>
+            <b-nav-item-dropdown text="Login" right class="pt-1">
                 <b-dropdown-form class="p-3">
                     <h5>Login to existing account</h5>
                     <b-alert
@@ -41,7 +41,7 @@
                     <b-button @click="login" variant="primary">Login</b-button>
                 </b-dropdown-form>
             </b-nav-item-dropdown>
-            <b-nav-item-dropdown text="Register" right>
+            <b-nav-item-dropdown text="Register" right class="pt-1">
                 <b-dropdown-form class="p-3">
                     <h5>Register New User</h5>
                     <b-alert
@@ -147,8 +147,9 @@ export default {
 <style scoped>
   .navbar {
     background: rgb(31, 20, 10);
-    border-bottom: solid greenyellow 7px;
+    border-bottom: solid greenyellow 5px;
   }
+
   .drop-input {
       width: 300px;
   }
@@ -158,10 +159,14 @@ export default {
   }
 
   .nav-user-icon {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
   }
   .nav-placeholder-user-icon {
-    font-size: 1.5em;
+    font-size: 25px;
+    /* height: 30px;
+    width: 30px; */
   }
+
+
 </style>
