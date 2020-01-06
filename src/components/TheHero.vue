@@ -2,10 +2,10 @@
     <header class="container-fluid">
         <div class="p-5">
             <h6 class="text-dark text-center hero-heading display-3 pt-4">
-                {{ msg }}
+                {{ logo }}
             </h6>
             <p class="hero-tagline">Grow your ideas.</p>
-            <b-button pill class="hero-btn" size="lg">Sign Up</b-button>
+            <b-button pill to="/signup" class="hero-btn" size="lg">Sign Up</b-button>
         </div>
         <img class="hero-img w-100" src="../assets/inspo-hero.jpg" alt="">
     </header>
@@ -16,7 +16,7 @@ export default {
   name: 'TheHero',
   data() {
     return {
-      msg: 'INSPO',
+      logo: 'INSPO',
     };
   },
   methods: {

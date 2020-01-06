@@ -6,6 +6,7 @@ import MyItems from '../components/MyItems.vue';
 import Test from '../components/Test.vue';
 import EditItem from '../components/EditItem.vue';
 import Profile from '../components/Profile.vue';
+import SignUp from '../components/SignUp.vue';
 
 Vue.use(VueRouter);
 
@@ -37,6 +38,12 @@ export default new VueRouter({
       path: '/myitems',
       name: 'MyItems',
       component: MyItems,
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp,
+      props: true,
     },
     {
       path: '/profile',

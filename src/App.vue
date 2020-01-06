@@ -16,6 +16,8 @@
         :userImage="userImage"
         :currentUserId="currentUserId"
         @submitFile="updateUserImage($event)"
+        @register="onSubmitRegister($event)"
+        :registrationError="registrationError"
       />
     </transition>
   </div>
@@ -97,7 +99,6 @@ export default {
             this.loginFailed();
             return;
           }
-          console.log(res);
           localStorage.token = res.data.data.token;
           this.isLoggedIn = true;
           // eslint-disable-next-line
@@ -106,8 +107,6 @@ export default {
           this.userImage = res.data.data.image_name;
           this.$router.replace(this.$route.query.redirect || '/profile');
           this.registrationError = false;
-          // eslint-disable-next-line
-          console.log(res);
         //   this.onReset(evt);
         })
         .catch((error) => {
@@ -134,7 +133,6 @@ export default {
         .then((res) => {
           // eslint-disable-next-line
           console.log('SUCCESS!!');
-          console.log(res);
           // eslint-disable-next-line
           this.userImage = res.data;
         })

@@ -38,7 +38,7 @@
                         class="mb-2 mb-2 drop-input"
                         required
                     ></b-input>
-                    <b-button @click="login" variant="primary">Login</b-button>
+                    <b-button pill @click="login" variant="primary">Login</b-button>
                 </b-dropdown-form>
             </b-nav-item-dropdown>
             <b-nav-item-dropdown text="Register" right class="pt-1">
@@ -72,13 +72,13 @@
                         class="mb-2 drop-input"
                         required
                     ></b-input>
-                    <b-button @click="register" variant="primary">Register</b-button>
+                    <b-button pill @click="register" variant="primary">Register</b-button>
                 </b-dropdown-form>
             </b-nav-item-dropdown>
 
             <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
-            <template v-if="isLoggedIn" v-slot:button-content>
+            <template v-if="userImage" v-slot:button-content>
                 <b-img
                   :src="`${apiUrl}/file/${userImage}`"
                   :alt="currentUser"
