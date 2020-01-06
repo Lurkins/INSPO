@@ -4,10 +4,17 @@
     <div class="row">
       <div class="col-12">
         <transition name="fade">
-        <h1 v-if="items.length" class="mt-5 pt-5">These are your items.</h1>
-        <h1 v-else class="mt-5 pt-5">You have no items to display.</h1>
+          <h1 v-if="items.length" class="mt-5 pt-5">These are your items.</h1>
+          <h1 v-else class="mt-5 pt-5">You have no items to display.</h1>
         </transition>
-        <button type="button" class="btn btn-success btn-sm" v-b-modal.item-modal>Add Item</button>
+        <b-button
+          pill
+          block
+          type="button"
+          variant="success"
+          class="btn btn-primary"
+          v-b-modal.item-modal
+        >Add Item</b-button>
         <hr>
       </div>
     </div>
@@ -15,47 +22,57 @@
     <div class="container-fluid container-item">
       <b-card-group columns>
         <transition-group name="fade" tag="div">
-        <b-card
-            bg-variant="light"
-            class="shadow"
-            v-for="(item) in items"
-            :key="item._id.$oid"
-            :title="item.title"
-            v-bind:img-src="item.image_name
-                ?
-                `${apiUrl}/file/${item.image_name}`
-                :
-                require('../assets/placeholder-image.png')"
-            :img-alt="item.title"
-            img-top
-        >
-          <b-card-text>
-            {{ item.description }}
-          </b-card-text>
-            <div class="btn-group" role="group">
-              <button
-                v-on:click="handleComplete(item._id.$oid)"
-                type="button"
-                class="btn btn-success btn-sm"
-              >Complete</button>
-              <button
-                type="button"
-                class="btn btn-dark px-3 btn-sm"
-                v-on:click="handleDelete(item._id.$oid)"
-              >Delete</button>
-              <button
-                type="button"
-                class="btn btn-warning px-3 btn-sm"
-                v-on:click="handleEdit(item._id.$oid)"
-              >Edit</button>
-            </div>
-          <template v-slot:footer>
-            <small>
-              <span v-if="item.done">Yes</span>
-              <span v-else>No</span>
-            </small>
-          </template>
-        </b-card>
+          <b-card
+              bg-variant="light"
+              class="shadow"
+              v-for="(item) in items"
+              :key="item._id.$oid"
+              :title="item.title"
+              v-bind:img-src="item.image_name
+                  ?
+                  `${apiUrl}/file/${item.image_name}`
+                  :
+                  require('../assets/placeholder-image.png')"
+              :img-alt="item.title"
+              img-top
+          >
+            <b-card-text>
+              {{ item.description }}
+            </b-card-text>
+              <!-- <div class="btn-group" role="group"> -->
+                <!-- <button
+                  v-on:click="handleComplete(item._id.$oid)"
+                  type="button"
+                  class="btn btn-success btn-sm"
+                >Complete</button> -->
+                <div>
+                  <b-button
+                    pill
+                    block
+                    type="button"
+                    variant="primary"
+                    class="btn btn-primary mb-3"
+                    v-on:click="handleEdit(item._id.$oid)"
+                  >Edit</b-button>
+                </div>
+                <div>
+                  <b-button
+                    pill
+                    block
+                    type="button"
+                    class="btn btn-danger mb-3"
+                    v-on:click="handleDelete(item._id.$oid)"
+                  >Delete</b-button>
+                </div>
+
+              <!-- </div> -->
+            <!-- <template v-slot:footer>
+              <small>
+                <span v-if="item.done">Yes</span>
+                <span v-else>No</span>
+              </small>
+            </template> -->
+          </b-card>
         </transition-group>
       </b-card-group>
     </div>
@@ -87,8 +104,8 @@
           </b-form-group>
         <b-form-group id="form-read-group">
         </b-form-group>
-        <b-button class="mr-3" type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Cancel</b-button>
+        <b-button pill class="mr-3" type="submit" variant="primary">Submit</b-button>
+        <b-button pill type="reset" variant="danger">Cancel</b-button>
       </b-form>
     </b-modal>
   <Footer />

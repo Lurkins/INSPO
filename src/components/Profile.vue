@@ -21,13 +21,19 @@
                 <div>
                     <div>
                         <b-form-group label="Image:" label-for="file" label-cols-sm="12">
-                            <b-form-file id="file" v-model="file" class="mb-5">
+                            <b-form-file
+                              id="file"
+                              accept="image/jpeg, image/png, image/gif"
+                              v-model="file"
+                              class="mb-5"
+                            >
                             </b-form-file>
-                            <button
-                                @click="submitFile()"
-                                type="button"
-                                class="btn btn-primary px-3">Submit
-                            </button>
+                            <b-button
+                              pill
+                              @click="submitFile()"
+                              type="button"
+                              class="btn btn-primary px-3">Submit
+                            </b-button>
                         </b-form-group>
                     </div>
                 </div>

@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <b-img :src="image
+                <b-img rounded :src="image
                   ?
                   `${apiUrl}/file/${image}`
                   :
@@ -23,13 +23,20 @@
                 <div>
                     <div>
                         <b-form-group label="Image:" label-for="file" label-cols-sm="12">
-                            <b-form-file id="file" v-model="file" class="mb-5">
+                            <b-form-file
+                              id="file"
+                              accept="image/jpeg, image/png, image/gif"
+                              v-model="file"
+                              class="mb-5"
+                            >
                             </b-form-file>
-                            <button
-                                v-on:click="submitFile(id)"
-                                type="button"
-                                class="btn btn-primary px-3">Submit
-                            </button>
+                            <b-button
+                              pill
+                              variant="primary"
+                              v-on:click="submitFile(id)"
+                              type="button"
+                              class="btn px-3">Submit
+                            </b-button>
                         </b-form-group>
                     </div>
                 </div>
@@ -64,8 +71,8 @@
                             required
                             ></b-form-input>
                         </b-form-group>
-                        <b-button type="submit" variant="primary">Save</b-button>
-                        <b-button type="reset" variant="danger">Reset</b-button>
+                        <b-button pill type="submit" class="m-2" variant="primary">Save</b-button>
+                        <b-button pill type="reset"  class="m-2" variant="danger">Reset</b-button>
                     </b-form>
                     <b-card class="my-5 mb-5" header="Form Data Result">
                     <pre class="m-0">{{ form }}</pre>
@@ -148,7 +155,6 @@ export default {
       };
       axios.put(path, payload)
         .then((res) => {
-          console.log(res);
           this.title = res.data.result.title;
           this.description = res.data.result.description;
           this.onReset(evt);
