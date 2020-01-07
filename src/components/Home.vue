@@ -82,11 +82,10 @@ export default {
 <style scoped>
 .icon {
     font-size: 6em;
-    color: rgb(31, 20, 10);;
+    color: black;
 }
 
 .section-2 {
-    background-color:white;
     background-image: url('~@/assets/creative.jpg');
     height: 100vh;
     background-repeat: no-repeat;
@@ -109,7 +108,7 @@ export default {
 }
 
 .section-heading {
-    background: rgba(31, 20, 10, 0.762);
+    background: rgba(0, 0, 0, 0.762);
     color: #D62EFF;
     font-size: 2.5em;
     font-weight: 300;

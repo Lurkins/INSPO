@@ -1,6 +1,6 @@
 <template>
     <div>
-    <b-navbar class="mb-5 navbar" toggleable="lg" type="dark" fixed="top">
+    <b-navbar class="mb-5 navbar" toggleable="lg" variant="dark" type="dark" fixed="top">
         <b-navbar-brand to="/">{{ msg }} <font-awesome-icon :icon="['fa', 'lightbulb']" />
         </b-navbar-brand>
 
@@ -94,7 +94,7 @@
               <!-- <em>User</em> -->
             </template>
             <b-dropdown-item to="/profile">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item to="/signout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
         </b-navbar-nav>
         </b-collapse>

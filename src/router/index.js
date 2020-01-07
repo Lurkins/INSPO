@@ -3,10 +3,10 @@ import VueRouter from 'vue-router';
 import Home from '../components/Home.vue';
 import Items from '../components/Items.vue';
 import MyItems from '../components/MyItems.vue';
-import Test from '../components/Test.vue';
 import EditItem from '../components/EditItem.vue';
 import Profile from '../components/Profile.vue';
 import SignUp from '../components/SignUp.vue';
+import SignOut from '../components/SignOut.vue';
 
 Vue.use(VueRouter);
 
@@ -25,11 +25,6 @@ export default new VueRouter({
       component: Items,
     },
     {
-      path: '/test',
-      name: 'Test',
-      component: Test,
-    },
-    {
       path: '/edit/:id',
       name: 'EditItem',
       component: EditItem,
@@ -44,6 +39,10 @@ export default new VueRouter({
       name: 'SignUp',
       component: SignUp,
       props: true,
+    },
+    {
+      path: '/signout',
+      component: SignOut,
     },
     {
       path: '/profile',

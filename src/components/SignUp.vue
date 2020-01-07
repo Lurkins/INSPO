@@ -42,7 +42,7 @@ import axios from 'axios';
 axios.defaults.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
 
 export default {
-  name: 'Navbar',
+  name: 'SignUp',
   props: ['currentUser', 'userImage', 'isLoggedIn', 'loginError', 'registrationError'],
   data() {
     return {
@@ -71,14 +71,10 @@ export default {
 };
 </script>
 <style scoped>
-.signup-block {
-   width: 300px;
-   background: rgb(31, 20, 10);
-}
-
-.signup-sub-text {
-
-}
+  .signup-block {
+    width: 300px;
+    background: rgb(31, 20, 10);
+  }
 
   .signup-sub-text,
   .navbar-dark
@@ -98,6 +94,5 @@ export default {
     /* height: 30px;
     width: 30px; */
   }
-
 
 </style>
