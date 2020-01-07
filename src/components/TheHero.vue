@@ -5,7 +5,13 @@
                 {{ logo }}
             </h6>
             <p class="hero-tagline">Grow your ideas.</p>
-            <b-button pill to="/signup" class="hero-btn" size="lg">Sign Up</b-button>
+            <b-button
+              pill
+              to="/signup"
+              variant="primary"
+              class="hero-btn"
+              size="lg"
+            >Sign Up</b-button>
         </div>
         <img class="hero-img w-100" src="../assets/inspo-hero.jpg" alt="">
     </header>
@@ -35,9 +41,9 @@ export default {
       font-size: 1.5em;
     }
 
-    .hero-btn {
+    /* .hero-btn {
       background: #D62EFF;
-    }
+    } */
     /* .hero-heading {
         position: absolute;
         top: 100px;

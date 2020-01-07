@@ -31,6 +31,7 @@
                             <b-button
                               pill
                               @click="submitFile()"
+                              variant="primary"
                               type="button"
                               class="btn btn-primary px-3">Submit
                             </b-button>

@@ -149,7 +149,8 @@ export default {
 
 </script>
 
-<style>
+<style lang="scss">
+@import './assets/styles/custom.scss';
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Questrial&display=swap');
 
 #app {

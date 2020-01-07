@@ -21,7 +21,8 @@
                 </div>
                 <div class="col-4">
                   <div class="pt-5">
-                    <img src="http://placekitten.com/200/300" alt="">
+                    <img src="../assets/footer_bulb.png" alt="lightbulb sprouting">
+                    <p class="footer-logo-name">INSPO</p>
                   </div>
               </div>
             </div>
@@ -41,3 +42,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .footer-logo-name  {
+    font-size: 3em;
+    font-family: 'Questrial', sans-serif;
+    font-weight: lighter;
+  }
+</style>

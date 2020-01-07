@@ -31,7 +31,7 @@
                 class="mb-2 drop-input"
                 required
             ></b-input>
-            <b-button pill @click="register" class="text-left" variant="primary">Submit</b-button>
+            <b-button pill @click="register" class="mt-5" variant="primary">Submit</b-button>
         </b-form>
     </div>
 </template>

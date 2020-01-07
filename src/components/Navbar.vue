@@ -146,7 +146,8 @@ export default {
 </script>
 <style scoped>
   .navbar {
-    background: rgb(31, 20, 10);
+    /* background: rgb(31, 20, 10); */
+    background-color: black;
     border-bottom: solid greenyellow 5px;
   }
 
@@ -155,7 +156,7 @@ export default {
   }
 
   .navbar-dark .navbar-nav .router-link-active, .navbar-dark .router-link-exact-active {
-    color: greenyellow;
+    /* color: greenyellow; */
   }
 
   .nav-user-icon {
@@ -166,6 +167,10 @@ export default {
     font-size: 25px;
     /* height: 30px;
     width: 30px; */
+  }
+
+  .navbar-dark .navbar-nav .nav-link {
+    color:greenyellow!important
   }
 
 

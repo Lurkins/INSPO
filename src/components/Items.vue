@@ -5,7 +5,6 @@
       <div class="col-12">
           <h1 v-if="items" class="mt-5 pt-5">All the Items</h1>
           <h1 v-else class="mt-5 pt-5">No Items to Display</h1>
-        <hr>
       </div>
     </div>
     </div>
@@ -13,8 +12,8 @@
       <b-card-group columns>
         <transition-group name="fade">
           <b-card
-            bg-variant="light"
-            class="shadow"
+            bg-variant="dark"
+            class="shadow text-light"
             v-for="(item) in items"
             :key="item._id.$oid"
             :title="item.title"

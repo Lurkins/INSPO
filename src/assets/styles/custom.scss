@@ -1,0 +1,10 @@
+$theme-colors: (
+  "primary": #D62EFF,
+  "danger": #8F00B3,
+  "success": yellowgreen,
+  "dark": black,
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+@import '../node_modules/bootstrap-vue/src/index.scss';

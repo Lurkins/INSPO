@@ -12,10 +12,9 @@
           block
           type="button"
           variant="success"
-          class="btn btn-primary"
+          class="mb-5"
           v-b-modal.item-modal
         >Add Item</b-button>
-        <hr>
       </div>
     </div>
     </div>
@@ -23,8 +22,9 @@
       <b-card-group columns>
         <transition-group name="fade" tag="div">
           <b-card
-              bg-variant="light"
-              class="shadow"
+              bg-variant="dark"
+              text="light"
+              class="shadow text-light"
               v-for="(item) in items"
               :key="item._id.$oid"
               :title="item.title"
