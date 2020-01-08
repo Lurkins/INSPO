@@ -7,6 +7,7 @@ import EditItem from '../components/EditItem.vue';
 import Profile from '../components/Profile.vue';
 import SignUp from '../components/SignUp.vue';
 import SignOut from '../components/SignOut.vue';
+import LogIn from '../components/LogIn.vue';
 
 Vue.use(VueRouter);
 
@@ -38,6 +39,12 @@ export default new VueRouter({
       path: '/signup',
       name: 'SignUp',
       component: SignUp,
+      props: true,
+    },
+    {
+      path: '/login',
+      // name: 'LogIn',
+      component: LogIn,
       props: true,
     },
     {

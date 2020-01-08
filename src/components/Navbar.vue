@@ -9,12 +9,12 @@
         <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
             <b-nav-item to="/items">All Items</b-nav-item>
-            <b-nav-item to="/myitems">My Items</b-nav-item>
+            <b-nav-item v-if="isLoggedIn" to="/myitems">My Items</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-nav-item-dropdown text="Login" right class="pt-1">
+            <b-nav-item-dropdown v-if="!isLoggedIn" text="Login" right class="pt-1">
                 <b-dropdown-form class="p-3">
                     <h5>Login to existing account</h5>
                     <b-alert
@@ -41,7 +41,7 @@
                     <b-button pill @click="login" variant="primary">Login</b-button>
                 </b-dropdown-form>
             </b-nav-item-dropdown>
-            <b-nav-item-dropdown text="Register" right class="pt-1">
+            <b-nav-item-dropdown v-if="!isLoggedIn" text="Register" right class="pt-1">
                 <b-dropdown-form class="p-3">
                     <h5>Register New User</h5>
                     <b-alert
@@ -93,8 +93,9 @@
               />
               <!-- <em>User</em> -->
             </template>
-            <b-dropdown-item to="/profile">Profile</b-dropdown-item>
-            <b-dropdown-item to="/signout">Sign Out</b-dropdown-item>
+            <b-dropdown-item v-if="isLoggedIn" to="/profile">Profile</b-dropdown-item>
+            <b-dropdown-item v-if="isLoggedIn" to="/signout">Sign Out</b-dropdown-item>
+            <b-dropdown-item v-else to="/signout">Please login for user menu.</b-dropdown-item>
             </b-nav-item-dropdown>
         </b-navbar-nav>
         </b-collapse>

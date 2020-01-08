@@ -18,6 +18,8 @@
         @submitFile="updateUserImage($event)"
         @register="onSubmitRegister($event)"
         :registrationError="registrationError"
+        @login="onSubmitLogin($event)"
+        :loginError="loginError"
       />
     </transition>
   </div>
