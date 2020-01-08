@@ -1,10 +1,18 @@
 <template>
-    <header class="container-fluid">
-        <div class="p-5">
-            <h6 class="text-dark text-center hero-heading display-3 pt-4">
+    <header class="container-fluid d-flex justify-content-center">
+      <div class="row my-5 py-5">
+        <div class="col-12 order-2 col-md-6 order-6- d-flex justify-content-center">
+          <img
+            class="hero-img d-block"
+            src="../assets/hero-bulb.jpg"
+            alt="lightbulb with plant inside"
+          ></div>
+        <div class="col-12 col-md-6 order-1 order-md-2">
+          <div class="mb-5">
+            <h6 class="text-dark text-center hero-heading display-3">
                 {{ logo }}
             </h6>
-            <p class="hero-tagline">Grow your ideas.</p>
+            <p class="hero-tagline text-nowrap">Grow your ideas.</p>
             <b-button
               pill
               to="/signup"
@@ -13,7 +21,9 @@
               size="lg"
             >Sign Up</b-button>
         </div>
-        <img class="hero-img w-100" src="../assets/inspo-hero.jpg" alt="">
+        </div>
+      </div>
+
     </header>
 </template>
 
@@ -32,6 +42,11 @@ export default {
 </script>
 
 <style scoped>
+    .hero-img {
+      max-width: 250px;
+      height: auto;
+    }
+
     .hero-heading {
       font-family: 'Questrial', sans-serif;
       font-weight: lighter;
