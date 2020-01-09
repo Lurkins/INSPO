@@ -8,6 +8,7 @@
       :isLoggedIn="isLoggedIn"
       :loginError="loginError"
       :registrationError="registrationError"
+      @signout="onSignOut"
     />
     <transition name="fade-slide-up" mode="out-in">
       <router-view
@@ -119,6 +120,10 @@ export default {
     },
     loginFailed() {
       this.loginError = true;
+    },
+    onSignOut() {
+      this.isLoggedIn = false;
+      this.userImage = '';
     },
     updateUserImage(imageData) {
       const formData = new FormData();

@@ -94,8 +94,12 @@
               <!-- <em>User</em> -->
             </template>
             <b-dropdown-item v-if="isLoggedIn" to="/profile">Profile</b-dropdown-item>
-            <b-dropdown-item v-if="isLoggedIn" to="/signout">Sign Out</b-dropdown-item>
-            <b-dropdown-item v-else to="/signout">Please login for user menu.</b-dropdown-item>
+            <b-dropdown-item
+              v-if="isLoggedIn"
+              @click="signout"
+              to="/signout"
+            >Sign Out</b-dropdown-item>
+            <b-dropdown-item v-else to="/signout">You are not logged in</b-dropdown-item>
             </b-nav-item-dropdown>
         </b-navbar-nav>
         </b-collapse>
@@ -141,6 +145,9 @@ export default {
     initForm() {
       this.form.username = '';
       this.form.password = '';
+    },
+    signout() {
+      this.$emit('signout');
     },
   },
 };
