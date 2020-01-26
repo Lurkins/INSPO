@@ -1,19 +1,19 @@
 <template>
-<div>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-          <h1 v-if="items" class="mt-5 pt-5">All the Items</h1>
-          <h1 v-else class="mt-5 pt-5">No Items to Display</h1>
+  <div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 v-if="items" class="my-5 py-5">All INSPO Items</h1>
+          <h1 v-else class="my-5 py-5">No Items to Display</h1>
+        </div>
       </div>
     </div>
-    </div>
     <div class="container-fluid container-item">
-      <b-card-group columns>
+      <b-card-group columns class="pb-5">
         <transition-group name="fade">
           <b-card
             bg-variant="dark"
-            class="shadow text-light"
+            class="shadow text-light mb-5"
             v-for="(item) in items"
             :key="item._id.$oid"
             :title="item.title"

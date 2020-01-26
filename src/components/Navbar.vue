@@ -1,7 +1,10 @@
 <template>
     <div>
     <b-navbar class="mb-5 navbar" toggleable="lg" variant="dark" type="dark" fixed="top">
-        <b-navbar-brand to="/">{{ msg }} <font-awesome-icon :icon="['fa', 'lightbulb']" />
+        <b-navbar-brand
+          class="logo"
+          to="/">{{ msg }}
+        <font-awesome-icon :icon="['fa', 'lightbulb']" />
         </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -14,7 +17,13 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-nav-item-dropdown v-if="!isLoggedIn" text="Login" right class="pt-1">
+            <b-nav-item-dropdown
+              v-if="!isLoggedIn"
+              text="Login"
+              right
+              id="nav-login-text"
+              class="pt-1"
+            >
                 <b-dropdown-form class="p-3">
                     <h5>Login to existing account</h5>
                     <b-alert
@@ -163,9 +172,16 @@ export default {
       width: 300px;
   }
 
-  .navbar-dark .navbar-nav .router-link-active, .navbar-dark .router-link-exact-active {
-    /* color: greenyellow; */
+  ul.navbar-nav .nav-item .router-link-active, nav.navbar .router-link-exact-active {
+    color: greenyellow;
   }
+
+  /* .navbar-dark .navbar-nav li.show > .nav-link {
+    color: greenyellow;
+  } */
+  /* #nav-login-text a {
+    color: greenyellow;
+  } */
 
   .nav-user-icon {
     height: 35px;
@@ -177,9 +193,9 @@ export default {
     width: 30px; */
   }
 
-  .navbar-dark .navbar-nav .nav-link {
+  /* .navbar-dark .navbar-nav .active {
     color:greenyellow!important
-  }
+  } */
 
 
 </style>

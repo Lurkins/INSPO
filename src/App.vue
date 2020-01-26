@@ -167,13 +167,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 30px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .fade-slide-up-enter-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 .fade-slide-up-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 .fade-slide-up-enter, .fade-slide-up-leave-to {
   /* transform: translateY(40px); */

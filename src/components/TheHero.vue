@@ -1,9 +1,9 @@
 <template>
     <header class="container-fluid d-flex justify-content-center">
       <div class="row my-5 py-5">
-        <div class="col-12 order-2 col-md-6 order-6- d-flex justify-content-center">
+        <div class="col-12 order-2 col-md-6 d-flex justify-content-center">
           <img
-            class="hero-img d-block"
+            class="hero-img"
             src="../assets/hero-bulb.jpg"
             alt="lightbulb with plant inside"
           ></div>
@@ -43,7 +43,6 @@ export default {
 
 <style scoped>
     .hero-img {
-      max-width: 250px;
       height: auto;
     }
 
