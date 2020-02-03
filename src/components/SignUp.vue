@@ -29,6 +29,7 @@
                 v-model="form.password"
                 placeholder="Password"
                 class="mb-2 drop-input"
+                type="password"
                 required
             ></b-input>
             <b-button pill @click="register" class="mt-5" variant="primary">Submit</b-button>

@@ -45,6 +45,7 @@
                         v-model="form.password"
                         placeholder="Password"
                         class="mb-2 mb-2 drop-input"
+                        type="password"
                         required
                     ></b-input>
                     <b-button pill @click="login" variant="primary">Login</b-button>
@@ -79,6 +80,7 @@
                         v-model="form.password"
                         placeholder="Password"
                         class="mb-2 drop-input"
+                        type="password"
                         required
                     ></b-input>
                     <b-button pill @click="register" variant="primary">Register</b-button>
