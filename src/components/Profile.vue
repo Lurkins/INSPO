@@ -20,7 +20,7 @@
             <div class="col-md-6">
                 <div>
                     <div>
-                        <b-form-group label="Image:" label-for="file" label-cols-sm="12">
+                        <b-form-group label="Profile Image:" label-for="file" label-cols-sm="12">
                             <b-form-file
                               id="file"
                               accept="image/jpeg, image/png, image/gif"

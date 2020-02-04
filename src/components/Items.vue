@@ -3,8 +3,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1 v-if="items" class="my-5 py-5">All INSPO Items</h1>
-          <h1 v-else class="my-5 py-5">No Items to Display</h1>
+          <h1 v-if="items" class="my-5 py-5">All INSPO items</h1>
+          <h1 v-else class="my-5 py-5">No items to display</h1>
         </div>
       </div>
     </div>
@@ -13,7 +13,7 @@
         <transition-group name="fade">
           <b-card
             bg-variant="dark"
-            class="shadow text-light mb-5"
+            class="shadow text-light mb-4"
             v-for="(item) in items"
             :key="item._id.$oid"
             :title="item.title"

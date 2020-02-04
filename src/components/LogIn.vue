@@ -22,6 +22,7 @@
                 placeholder="Password"
                 class="mb-2 mb-2 drop-input"
                 required
+                type="password"
             ></b-input>
             <b-button pill @click="login" variant="primary">Login</b-button>
         </b-form>
